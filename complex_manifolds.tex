@@ -1,0 +1,170 @@
+\input{header.tex}
+\newcommand{\Cscr}{\mathscr{C}}
+\newcommand{\op}{\mathrm{op}}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\Mat{Mat}
+
+\title{Complex Manifolds}
+\author{Yannis B\"ahni}
+\address[Yannis B\"ahni]{Universität Zürich, R\"amistrasse 71, 8006 Zurich}
+\email[Yannis B\"ahni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+%\thispagestyle{fancy}
+
+\tableofcontents
+
+\section{Functions of Several Complex Variables}
+This section summarizes the fundamental properties of functions of several complex variables needed later. The results are inspired by \cite[14--30]{grauert:complex_manifolds:2010}.
+
+\begin{definition}
+Let $n \in \mathbb{Z}$, $n \geq 1$, $U \subseteq \mathbb{C}^n$ open and $a \in U$. A mapping $f : U \to \mathbb{C}$ is said to be \bld{complex differentiable at $a$} if there exists $g : U \to \mathbb{C}^n$ such that $g$ is continuous at $a$ and
+\begin{equation}
+f(z) = f(a) + \sum_{\nu = 1}^n(z_\nu - a_\nu)g_\nu(z)
+\end{equation} 
+\noindent holds for all $z \in D$. $f$ is said to be \bld{holomorphic in $D$} if it is complex differentiable at every point $a \in D$. For $m \in \mathbb{Z}$, $m \geq 1$, a mapping $f : U \to \mathbb{C}^m$ is said to be holomorphic in $D$ if each component function $f_\nu$, $\nu = 1,\dots,n$, is holomorphic in $D$.
+\label{def:holomorphic}
+\end{definition}
+
+\begin{proposition}
+Let $n \in \mathbb{Z}$, $n \geq 1$, $D \subseteq \mathbb{C}^n$ open, $a \in U$ and $f : D \to \mathbb{C}$ real differentiable at $a$. Then
+\begin{equation}
+\frac{\partial f}{\partial z_\nu}(a) = \frac{1}{2}\del[3]{\frac{\partial f}{\partial x_\nu}(a) - i \frac{\partial f}{\partial y_\nu}(a)} \qquad \text{and} \qquad \frac{\partial f}{\partial \overline{z}_\nu}(a) = \frac{1}{2}\del[3]{\frac{\partial f}{\partial x_\nu}(a) + i \frac{\partial f}{\partial y_\nu}(a)}
+\end{equation}  
+\noindent holds for all $\nu = 1,\dots,n$.
+\label{prop:Wirtinger}
+\end{proposition}
+
+\begin{theorem}[The Cauchy-Riemann Equations]
+Let $n \in \mathbb{Z}$, $n \geq 1$ and $D \subseteq \mathbb{C}^n$ open. A mapping $f: D \to \mathbb{C}$ is holomorphic in $D$ if and only if it is real differentiable at every $a \in D$ and the \bld{Cauchy-Riemann equations}
+\begin{equation}
+\frac{\partial f}{\partial \overline{z}_\nu}(a) = 0 
+\end{equation}
+\noindent holds for all $a \in D$ and $\nu = 1,\dots,n$.
+\label{thm:CR}
+\end{theorem}
+
+\begin{corollary}
+Let $m,n \in \mathbb{Z}$, $m,n \geq 1$, $D \subseteq \mathbb{C}^n$ open and $f: D \to \mathbb{C}^m$ holomorphic in $D$. If $f = g + ih$, $g,h : D \to \mathbb{R}^m$, then 
+\begin{equation}
+\boxed{\frac{\partial g_\mu}{\partial x_\nu}(a) = \frac{\partial h_\mu}{\partial y_\nu}(a) \qquad \text{and} \qquad \frac{\partial h_\mu}{\partial x_\nu}(a) = -\frac{\partial g_\mu}{\partial y_\nu}(a)}
+\end{equation} 
+\noindent holds for any $a \in D$, $\nu = 1,\dots,n$ and $\mu = 1,\dots,m$.
+\label{cor:CRreal}
+\end{corollary}
+
+\begin{proof}
+Fix $\mu = 1,\dots,m$. By definition \ref{def:holomorphic} $f_\mu$ is holomorphic in $D$. Hence $f_\mu$ is real differentiable in $D$ (see \cite[27]{grauert:complex_manifolds:2010}) and theorem \ref{thm:CR} implies
+\begin{equation*}
+\frac{\partial f_\mu}{\partial \overline{z}_\nu}(a) = 0
+\end{equation*}
+\noindent for all $a \in D$ and $\nu = 1,\dots,n$. By proposition \ref{prop:Wirtinger}, this is equivalent to 
+\begin{equation*}
+\frac{\partial f}{\partial x_\nu}(a) + i \frac{\partial f}{\partial y_\nu}(a) = 0.
+\end{equation*}
+Using $f_\mu = g_\mu + i h_\mu$ and the $\mathbb{C}$-linearity of the operators $\frac{\partial}{\partial x_\nu}$ and $\frac{\partial}{\partial y_\nu}$ yields
+\begin{equation*}
+\frac{\partial g_\mu}{\partial x_\nu}(a) - \frac{\partial h_\mu}{\partial y_\nu}(a) + i \del[3]{ \frac{\partial h_\mu}{\partial x_\nu}(a) + \frac{\partial g_\mu}{\partial y_\nu}(a)} = 0.
+\end{equation*}
+\end{proof}
+
+\section{Almost Complex Structures}
+The following definition is taken from \cite[86]{cannas:symplectic_geometry:2008}.
+\begin{definition}
+Let $M$ be a smooth manifold. An \bld{almost complex structure on $M$} is a smooth tensor field $J \in \Gamma\del[1]{T^{(1,1)}TM}$ such that $J_p \circ J_p = -\id_{T_pM}$ holds for any $p \in M$. If $J$ is an almost complex structure on $M$, the tuple $(M,J)$ is called an \bld{almost complex manifold}.
+\end{definition}
+
+\begin{proposition}
+Every almost complex manifold is of even dimension and orientable.
+\end{proposition}
+
+\begin{proof}
+Assume that $n := \dim M$ is odd. Let $p \in M$. Then by \cite[57]{lee:smooth_manifolds:2013} we have that $\dim T_p M = n$. Hence $\dim T_pM$ is odd. But by
+\begin{equation*}
+\del[1]{\det(J_p)}^2 = \det(J_p \circ J_p) = \det(-\id_{T_pM}) = (-1)^n \det(\id_{T_pM}) = (-1)^n
+\end{equation*}
+\noindent we see that $n$ must be even since $\det(J_p) \in \mathbb{R}$ and hence $\del[1]{\det(J_p)}^2 > 0$. Contradiction.\\
+\end{proof}
+
+\section{Complex Manifolds}
+The definition of smooth manifolds adapts smoothly to the complex case.
+
+\begin{definition}
+Let $n \in \mathbb{Z}$, $n \geq 1$. An \bld{$n$-dimensional complex manifold} is a second countable Hausdorff space $M$ equipped with a holomorphic structure, that is a holomorphic atlas $\cbr[0]{(U_\alpha, \varphi_\alpha) : \alpha \in A}$ of complex charts $(U_\alpha,\varphi_\alpha)$, such that all the transition maps are holomorphically compatible.
+\end{definition}
+
+\begin{lemma}
+Let $V$ be a real vector space of dimension $n \in \mathbb{Z}$, $n \geq 1$. Then
+\begin{equation}
+V \otimes V^* \cong \End(V)
+\end{equation}
+\noindent canonically. If $(e_\nu)$ is a basis of $V$ and $(e_\nu^*)$ the corresponding basis of $V^*$, then $f \in \End(V)$ corresponds to
+\begin{equation}
+\sum_{\nu = 1}^n f(e_\nu) \otimes e_\nu^*.
+\end{equation}
+\label{lem:corr}
+\end{lemma}
+
+\begin{proof}
+It is easily checked that
+\begin{equation*}
+\Phi:\begin{cases} 
+V \times V^* \to \End(V)\\
+(v,f) \mapsto \del[1]{u \mapsto f(u)v}
+\end{cases}
+\end{equation*}
+\noindent is bilinear. Thus by the universal property of the tensor product there exists a unique mapping $\widehat{\Phi} \in \Hom(V \otimes V^*; \End(V))$ such that $\Phi = \widehat{\Phi} \circ \otimes$. It is also easily checked that $\widehat{\Phi}$ is an isomorphism.\\
+Let $f \in \End(V)$. Then for any $v \in V$ we have
+\begin{equation*}
+\widehat{\Phi}\del[3]{\sum_{\nu = 1}^n f(e_\nu) \otimes e_\nu^*}(v) = \sum_{\nu = 1}^n \widehat{\Phi}\del[1]{f(e_\nu) \otimes e_\nu^*}(v) = \sum_{\nu = 1}^n e_\nu^*(v)f(e_\nu) = f\del[3]{\sum_{\nu = 1}^n e_\nu^*(v)e_\nu} = f(v).
+\end{equation*}
+\end{proof}
+
+\begin{proposition}
+Any complex manifold admits a canonical almost complex structure.
+\end{proposition}
+
+\begin{proof}
+First we define $J_p$ in terms of local coordinates. By lemma \ref{lem:corr} it is also enough to construct an endomorphism. Let $p \in M$. Given a chart $\del[1]{U,(x^\nu,y^\nu)}$ with $p \in U$, we define
+\begin{equation*}
+J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} := \frac{\partial}{\partial y^\nu}\bigg\vert_p \qquad \text{and} \qquad J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p} := -\frac{\partial}{\partial x^\nu}\bigg\vert_p
+\end{equation*}
+\noindent for all $\nu = 1,\dots,n$. As standard linear algebra shows, there is a unique linear mapping associated with $J_p$ (see \cite[69]{hoffman:linear_algebra:1971}). Let $v := a^\nu\frac{\partial}{\partial x^\nu}\big\vert_p + b^\nu\frac{\partial}{\partial y^\nu}\big\vert_p \in T_p M$. Then
+\begin{align*}
+(J_p \circ J_p)(v) &=J_p\del[3]{a^\nu J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} + b^\nu J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p}}\\
+&= J_p\del[3]{a^\nu \frac{\partial}{\partial y^\nu}\bigg\vert_p - b^\nu \frac{\partial}{\partial x^\nu}\bigg\vert_p}\\
+&= -a^\nu \frac{\partial}{\partial x^\nu}\bigg\vert_p - b^\nu \frac{\partial}{\partial y^\nu}\bigg\vert_p\\
+&= -v
+\end{align*}
+\noindent and thus $J_p \circ J_p = -\id_{T_pM}$.\\
+Next we have to show that above locally defined mapping is well-defined, i.e. does not depend on the choice of coordinates. Assume that $p$ lies also in the domain of the chart $\del[1]{V,(u^i,v^i)}$. By the change of coordinates formula \cite[64]{lee:smooth_manifolds:2013} we get that
+\begin{equation*}
+\frac{\partial}{\partial x^\nu}\bigg\vert_p = \frac{\partial u^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p + \frac{\partial v^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p \qquad \text{and} \qquad \frac{\partial}{\partial y^\nu}\bigg\vert_p = \frac{\partial u^\mu}{\partial y^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p + \frac{\partial v^\mu}{\partial y^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p. 
+\end{equation*}
+\noindent where $\widehat{p}$ denotes the coordinate representation of $p$ with respect to the coordinates $(x^\nu,y^\nu)$. Corollary \ref{cor:CRreal} implies
+\begin{align*}
+J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} &= \frac{\partial u^\mu}{\partial x^\nu}(\widehat{p})J_p\del[3]{\frac{\partial}{\partial u^\mu}\bigg\vert_p} + \frac{\partial v^\mu}{\partial x^\nu}(\widehat{p})J_p\del[3]{\frac{\partial}{\partial v^\mu}\bigg\vert_p}\\
+&= \frac{\partial u^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p - \frac{\partial v^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p\\
+&= \frac{\partial v^\mu}{\partial y^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p + \frac{\partial u^\mu}{\partial y^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p\\
+&= \frac{\partial}{\partial y^\nu}\bigg\vert_p
+\end{align*}
+\noindent and
+\begin{align*}
+J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p} &= \frac{\partial u^\mu}{\partial y^\nu}(\widehat{p})J_p\del[3]{\frac{\partial}{\partial u^\mu}\bigg\vert_p} + \frac{\partial v^\mu}{\partial y^\nu}(\widehat{p})J_p\del[3]{\frac{\partial}{\partial v^\mu}\bigg\vert_p}\\
+&= \frac{\partial u^\mu}{\partial y^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p - \frac{\partial v^\mu}{\partial y^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p\\
+&= -\frac{\partial v^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p - \frac{\partial u^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p\\
+&= -\frac{\partial}{\partial x^\nu}\bigg\vert_p.
+\end{align*}
+Left to check is smoothness. According to lemma \ref{lem:corr} the corresponding rough tensor field is given by
+\begin{equation*}
+J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} \otimes \d x^\nu\vert_p + J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p} \otimes \d y^\nu\vert_p = \frac{\partial}{\partial y^\nu}\bigg\vert_p \otimes \d x^\nu\vert_p - \frac{\partial}{\partial x^\nu}\bigg\vert_p \otimes \d y^\nu\vert_p
+\end{equation*}
+\noindent for any $p \in U$. Thus the smoothness criteria for tensor fields \cite[317--318]{lee:smooth_manifolds:2013} together with \cite[36]{lee:smooth_manifolds:2013} yields that $J \in \Gamma\del[1]{T^{(1,1)}TM}$.
+\end{proof}
+\printbibliography
+\end{document}
