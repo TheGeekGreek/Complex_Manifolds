@@ -13,7 +13,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-
+Goal of this paper is to give an overview of the basic definitions of complex and K\"ahler manifolds together with the most important properties. The main theorem will be the \emph{Newlander-Nirenberg Theorem} which gives a criterion under which an almost complex manifold is a complex one. The key role will be played by a certain tensor field, the so called \emph{Nijenhuis tensor}.
 \end{abstract}
 %\thispagestyle{fancy}
 
@@ -77,8 +77,32 @@ Using $f_\mu = g_\mu + i h_\mu$ and the $\mathbb{C}$-linearity of the operators 
 \end{equation*}
 \end{proof}
 
+\section{Complex Structures on Vector Spaces}
+In what follows, let $n \in \mathbb{Z}$, $n \geq 1$. Consider an $n$-dimensional complex vector space and let $J \in \End_\mathbb{C}(V)$ be defined by $J(v) := iv$. Then clearly $J \circ J = -\id_V$. Since every $n$-dimensional complex vector space can be seen as a $2n$-dimensional real vector space in a natural way, i.e. if $(e_\nu)$ is a basis for the complex vector space $V$, then $(e_\nu,ie_\nu)$ is a basis for the real vector space $V$, the mapping $J$ induces an $\mathbb{R}$-endomorphism $J$ on the real vector space $V$ simply by $J(e_\nu) = ie_\nu$ and $J(ie_\nu) = -e_\nu$ for all $\nu = 1,\dots,n$.\\
+Conversly, let $V$ be an $n$-dimensional real vector space with $J \in \End_\mathbb{R}(V)$ such that $J \circ J = -\id_V$. One can show, that 
+\begin{equation}
+zv := xv + yJ(v)
+\label{eq:complex}
+\end{equation}
+\noindent for $z := x + iy \in \mathbb{C}$ and $v \in V$ makes $V$ into a complex vector space. This motivates the following definition.
+\begin{definition}
+Let $V$ be an $n$-dimensional real vector space. A \bld{complex structure on $V$} is a $\mathbb{R}$-linear mapping $J: V \to V$ such that $J \circ J = -\id_V$. If $J$ is a complex structure on $V$, the tuple $(V,J)$ is called a \bld{complex vector space}.
+\end{definition}
+
+\begin{lemma}
+Let $(V,J)$ be a complex vector space. Then $\dim V$ is even.
+\label{lem:complex_vec}
+\end{lemma}
+
+\begin{proof}
+That $\dim V$ must be even follows directly from
+\begin{equation*}
+\del[1]{\det(J)}^2 = \det(J \circ J) = \det(-\id_V) = (-1)^{\dim V} \det(\id_V) = (-1)^{\dim V}.
+\end{equation*} 
+\end{proof}
+
 \section{Almost Complex Structures}
-The following definition is taken from \cite[86]{cannas:symplectic_geometry:2008}.
+If $M$ is a smooth manifold, then $T_pM$ is a finite dimensional real vector space. Hence we can generalize the definitions and results of the previous section to manifolds. The following definition is taken from \cite[86]{cannas:symplectic_geometry:2008}.
 \begin{definition}
 Let $M$ be a smooth manifold. An \bld{almost complex structure on $M$} is a smooth tensor field $J \in \Gamma\del[1]{T^{(1,1)}TM}$ such that $J_p \circ J_p = -\id_{T_pM}$ holds for any $p \in M$. If $J$ is an almost complex structure on $M$, the tuple $(M,J)$ is called an \bld{almost complex manifold}.
 \end{definition}
@@ -89,11 +113,28 @@ Every almost complex manifold is of even dimension and orientable.
 \end{proposition}
 
 \begin{proof}
-Assume that $n := \dim M$ is odd. Let $p \in M$. Then by \cite[57]{lee:smooth_manifolds:2013} we have that $\dim T_p M = n$. Hence $\dim T_pM$ is odd. But by
+Assume that $\dim M$ is odd. Let $p \in M$. Then by \cite[57]{lee:smooth_manifolds:2013} we have that $\dim T_p M = \dim M$. Hence $\dim T_pM$ is odd. But by lemma \ref{lem:complex_vec}, $\dim T_p M$ must be even since $(T_pM,J_p)$ is a complex vector space. Contradiction.\\
+Assume that $J$ is an almost complex structure on $M$. Since $M$ is a smooth manifold, there exists a Riemannian metric $g$ on $M$ (see \cite[329]{lee:smooth_manifolds:2013}). Define 
 \begin{equation*}
-\del[1]{\det(J_p)}^2 = \det(J_p \circ J_p) = \det(-\id_{T_pM}) = (-1)^n \det(\id_{T_pM}) = (-1)^n
+\widetilde{g}(X,Y) := g(X,Y) + g(JX,JY) \in \Gamma(T^{(0,2)}TM)
 \end{equation*}
-\noindent we see that $n$ must be even since $\det(J_p) \in \mathbb{R}$ and hence $\del[1]{\det(J_p)}^2 > 0$. Contradiction.\\
+\noindent for all $X,Y \in \mathfrak{X}(M)$. Then
+\begin{equation*}
+\widetilde{g}(JX,JY) = g(JX,JY) + g(-X,-Y) = g(JX,JY) + g(X,Y) = \widetilde{g}(X,Y)
+\end{equation*}
+\noindent by the bilinearity of $g$. Furthermore, clearly $\widetilde{g}$ is positive definite and symmetric, thus a Riemannian metric on $M$. Define
+\begin{equation*}
+\omega(X,Y) := \widetilde{g}(X,JY).
+\end{equation*}
+Then by
+\begin{equation*}
+\omega(Y,X) = \widetilde{g}(Y,JX) = \widetilde{g}(JX,Y) = \widetilde{g}(-X,JY) = -\omega(X,Y)
+\end{equation*}
+\noindent we see that $\omega$ is skew-symmetric. Hence $\omega \in \Omega^2(M)$. Let $p \in M$ and $u \in T_pM \setminus \cbr{0}$. Then also $-J_p(u) \neq 0$ since $J_p$ is invertible since $\det J_p = 1$. Hence
+\begin{equation*}
+\omega\del[1]{u,-J_p(u)} = \widetilde{g}_p\del[1]{u,-(J_p \circ J_p)(u)} = \widetilde{g}(u,u) \neq 0
+\end{equation*}
+\noindent and by \cite[565]{lee:smooth_manifolds:2013} we get that $\omega$ is nondegenrate. Let $\dim M = 2n$. By \cite[567]{lee:smooth_manifolds:2013} this implies that $\omega_p \wedge \dots \wedge \omega_p$ is nonzero for each $p \in M$. Hence $\omega \wedge \dots \wedge \omega$ is a nonvanishing top form on $M$. Since any nonvanishing top form determines an orientation (see \cite[381]{lee:smooth_manifolds:2013}), we have that $M$ is orientable.
 \end{proof}
 
 \begin{remark}
@@ -139,10 +180,11 @@ Let $f \in \End(V)$. Then for any $v \in V$ we have
 
 \begin{proposition}
 Any complex manifold admits a canonical almost complex structure.
+\label{prop:complex_is_almost}
 \end{proposition}
 
 \begin{proof}
-First we define $J_p$ in terms of local coordinates. By lemma \ref{lem:corr} it is also enough to construct an endomorphism. Let $p \in M$. Given a chart $\del[1]{U,(x^\nu,y^\nu)}$ with $p \in U$, we define
+Fix a complex manifold $M$. We define $J$ in terms of local coordinates. Let $\del[1]{U,(x^\nu,y^\nu)}$ be a chart. By lemma \ref{lem:corr} it is also enough to construct an endomorphism $J_p$ for every $p \in U$. We define
 \begin{equation*}
 J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} := \frac{\partial}{\partial y^\nu}\bigg\vert_p \qquad \text{and} \qquad J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p} := -\frac{\partial}{\partial x^\nu}\bigg\vert_p
 \end{equation*}
@@ -154,7 +196,7 @@ J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} := \frac{\partial}{\part
 &= -v
 \end{align*}
 \noindent and thus $J_p \circ J_p = -\id_{T_pM}$.\\
-Next we have to show that above locally defined mapping is well-defined, i.e. does not depend on the choice of coordinates. Assume that $p$ lies also in the domain of the chart $\del[1]{V,(u^i,v^i)}$. By the change of coordinates formula \cite[64]{lee:smooth_manifolds:2013} we get that
+Next we have to show that above locally defined mapping is well-defined, i.e. does not depend on the choice of coordinates. Assume that $p \in U \cap V$ for another chart $\del[1]{V,(u^i,v^i)}$. By the change of coordinates formula \cite[64]{lee:smooth_manifolds:2013} we get that
 \begin{equation*}
 \frac{\partial}{\partial x^\nu}\bigg\vert_p = \frac{\partial u^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial u^\mu}\bigg\vert_p + \frac{\partial v^\mu}{\partial x^\nu}(\widehat{p})\frac{\partial}{\partial v^\mu}\bigg\vert_p
 \end{equation*}
@@ -182,5 +224,56 @@ J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} \otimes \d x^\nu\vert_p 
 \end{equation*}
 \noindent for any $p \in U$. Thus the smoothness criteria for tensor fields \cite[317--318]{lee:smooth_manifolds:2013} together with \cite[36]{lee:smooth_manifolds:2013} yields that $J \in \Gamma\del[1]{T^{(1,1)}TM}$.
 \end{proof}
+
+A question which naturally arises by considering proposition \ref{prop:complex_is_almost} is, if the converse is also true, i.e. if every almost complex manifold is a complex manifold. This is in general not the case. Let $\mathbb{P}$ denote the naturally oriented underlying smooth manifold of the complex projective plane. Again using results about Chern numbers it can be shown that
+\begin{equation}
+\mathbb{P} \# (\mathbb{S}^1 \times \mathbb{S}^3) \# (\mathbb{S}^1 \times \mathbb{S}^3) \qquad \text{and} \qquad (\mathbb{S}^1 \times \mathbb{S}^3) \# (\mathbb{S}^1 \times \mathbb{S}^3) \# (\mathbb{S}^2 \times \mathbb{S}^2)
+\end{equation}
+\noindent have almost complex structures but no complex structure (see \cite[1627]{ven:chern:1966}). 
+
+\section{The Nijenhuis Tensor and the Newlander-Nirenberg Theorem}
+As we have seen in the last section, not every almost complex manifold is a complex manifold. Under which condition is this possible?
+
+\begin{definition}
+Let $(M,J)$ be an almost complex manifold. For $X,Y \in \mathfrak{X}(M)$ we define the \bld{Nijenhuis tensor $N$} as
+\begin{equation}
+N(X,Y) := \sbr[0]{JX,JY} - J\sbr[0]{X,JY} - J\sbr[0]{JX,Y} - \sbr[0]{X,Y}
+\end{equation}
+\noindent where $\sbr[0]{X,Y}$ denotes the usual Lie-bracket of vector fields.
+\end{definition}
+
+\begin{proposition}
+Let $(M,J)$ be an almost complex manifold and $N$ be the associated Nijenhuis tensor. Then $N \in \Gamma\del[1]{T^{(1,2)}TM}$.
+\label{prop:nijenhuis_tensor}
+\end{proposition}
+
+\begin{proof}
+First of all, $N(X,Y) \in \mathfrak{X}(M)$ for all $X,Y \in \mathfrak{X}(M)$. This follows immediately by considering $J$ as a mapping $J : \mathfrak{X}(M) \to \mathfrak{X}(M)$ (see \cite[26]{kobayashi:diff_geo_I:1996}), the fact that the Lie Bracket of two smooth vector fields is again a smooth vector field (see \cite[186]{lee:smooth_manifolds:2013}) and that $\mathfrak{X}(M)$ is a $\Cscr^\infty(M)$-module (see \cite[177]{lee:smooth_manifolds:2013}). Let $f \in \Cscr^\infty(M)$ and $X,Y,Z \in \mathfrak{X}(M)$. Then
+\begin{align*}
+N(fX + Y,Z) =& \sbr[0]{J(fX + Y),JZ} - J\sbr[0]{fX + Y,JZ} - J\sbr[0]{J(fX + Y),Z}\\
+ &- \sbr[0]{fX + Y,Z}\\
+=& \sbr[0]{fJX + JY,JZ} - J\sbr[0]{fX + Y,JZ} - J\sbr[0]{fJX + JY,Z}\\
+& - \sbr[0]{fX + Y,Z}\\
+=& \sbr[0]{fJX,JZ} + \sbr[0]{JY,JZ} - J\sbr[0]{fX,JZ} - J\sbr[0]{Y,JZ} - J\sbr[0]{fJX,Z}\\
+& -J\sbr[0]{JY,Z} - \sbr[0]{fX,Z} - \sbr[0]{Y,Z}\\
+=& f\sbr[0]{JX,JZ} - (JZf)JX + \sbr[0]{JY,JZ} - fJ\sbr[0]{X,JZ} + (JZf)JX\\
+& - \sbr[0]{Y,JZ} - fJ\sbr[0]{JX,Z} + (Zf)JJX - J\sbr[0]{JY,Z} - f\sbr[0]{X,Z}\\
+& + (Zf)X - \sbr[0]{Y,Z}\\
+=& fN(X,Z) + N(Y,Z).
+\end{align*}
+\noindent by \cite[187--188]{lee:smooth_manifolds:2013}. Linearity in the second argument is shown similarly. Hence $N : \mathfrak{X}(M) \times \mathfrak{X}(M) \to \mathfrak{X}(M)$ is bilinear over $\Cscr^\infty(M)$. So by \cite[26]{kobayashi:diff_geo_I:1996} we have that $N \in \Gamma\del[1]{T^{(1,2)}TM}$.
+\end{proof}
+
+\begin{theorem}[Newlander-Nirenberg]
+Let $(M,J)$ be an almost complex manifold. Then $M$ is a complex manifold, where the complex structure is so that the canonically induced almost complex structure is $J$, if and only if the Nijenhuis tensor $N$ vanishes identically.
+\end{theorem}
+
+\begin{proof}
+Assume $M$ is a complex manifold. Let $(U,(x^\nu,y^\nu))$ be a chart. From proposition \ref{prop:nijenhuis_tensor} it is enough to consider the coordinate vector fields $\frac{\partial}{\partial x^\nu}$ and $\frac{\partial}{\partial y^\nu}$. But from the explicit definition of $J$  in proposition \ref{prop:complex_is_almost} and the property, that the Lie-Bracket of coordinate vector fields vanishes, together with the $\Cscr^\infty(M)$-linearity of $J$ we get that $N$ vanishes identically on each chart, and thus on $M$.\\
+The other direction however is far more technical and uses results on partial differential equations. A complete proof can either be found in the original paper \cite{newlander:coordinates:1957} or in \cite[106]{cannas:symplectic_geometry:2008}, where references to more recent proofs are given.
+\end{proof}
+
+\section{K\"ahler Manifolds}
+
 \printbibliography
 \end{document}
