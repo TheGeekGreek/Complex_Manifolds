@@ -4,6 +4,8 @@
 \DeclareMathOperator\End{End}
 \DeclareMathOperator\Hom{Hom}
 \DeclareMathOperator\Mat{Mat}
+\newcommand{\Xfrak}{\mathfrak{X}}
+\newcommand{\Ascr}{\mathscr{A}}
 
 \title{Complex Manifolds}
 \author{Yannis B\"ahni}
@@ -108,13 +110,13 @@ Let $M$ be a smooth manifold. An \bld{almost complex structure on $M$} is a smoo
 \end{definition}
 
 \begin{proposition}
-Every almost complex manifold is of even dimension and orientable.
+Every almost complex manifold $(M,J)$ is of even dimension and orientable.
 \label{prop:almost_comp}
 \end{proposition}
 
 \begin{proof}
 Assume that $\dim M$ is odd. Let $p \in M$. Then by \cite[57]{lee:smooth_manifolds:2013} we have that $\dim T_p M = \dim M$. Hence $\dim T_pM$ is odd. But by lemma \ref{lem:complex_vec}, $\dim T_p M$ must be even since $(T_pM,J_p)$ is a complex vector space. Contradiction.\\
-Assume that $J$ is an almost complex structure on $M$. Since $M$ is a smooth manifold, there exists a Riemannian metric $g$ on $M$ (see \cite[329]{lee:smooth_manifolds:2013}). Define 
+Since $M$ is a smooth manifold, there exists a Riemannian metric $g$ on $M$ (see \cite[329]{lee:smooth_manifolds:2013}). Define 
 \begin{equation*}
 \widetilde{g}(X,Y) := g(X,Y) + g(JX,JY) \in \Gamma(T^{(0,2)}TM)
 \end{equation*}
@@ -130,10 +132,17 @@ Then by
 \begin{equation*}
 \omega(Y,X) = \widetilde{g}(Y,JX) = \widetilde{g}(JX,Y) = \widetilde{g}(-X,JY) = -\omega(X,Y)
 \end{equation*}
-\noindent we see that $\omega$ is skew-symmetric. Hence $\omega \in \Omega^2(M)$. Let $p \in M$ and $u \in T_pM \setminus \cbr{0}$. Then also $-J_p(u) \neq 0$ since $J_p$ is invertible since $\det J_p = 1$. Hence
-\begin{equation*}
-\omega\del[1]{u,-J_p(u)} = \widetilde{g}_p\del[1]{u,-(J_p \circ J_p)(u)} = \widetilde{g}(u,u) \neq 0
-\end{equation*}
+\noindent we see that $\omega$ is skew-symmetric. Hence $\omega \in \Omega^2(M)$. Let $p \in M$ and $u \in T_pM \setminus \cbr{0}$. Then also $-J_p(u) \neq 0$ since $J_p$ is invertible since $\det J_p = 1$. Furthermore, by \cite[177]{lee:smooth_manifolds:2013}, there exist $X,Y \in \Xfrak(M)$, such that $X_p = u$ and $Y_p = -J_p(u)$. Hence
+\begin{align*}
+\omega_p\del[1]{u,-J_p(u)} &= \omega_p(X_p,Y_p)\\
+&= \omega(X,Y)(p)\\
+&= \widetilde{g}(X,JY)(p)\\
+&= \widetilde{g}_p\del[1]{X_p,(JY)_p}\\
+&= \widetilde{g}_p\del[1]{u,J_p(Y_p)}\\
+&= \widetilde{g}_p\del[1]{u,-(J_p \circ J_p)(u)}\\
+&= \widetilde{g}_p(u,u)\\
+&\neq 0
+\end{align*}
 \noindent and by \cite[565]{lee:smooth_manifolds:2013} we get that $\omega$ is nondegenrate. Let $\dim M = 2n$. By \cite[567]{lee:smooth_manifolds:2013} this implies that $\omega_p \wedge \dots \wedge \omega_p$ is nonzero for each $p \in M$. Hence $\omega \wedge \dots \wedge \omega$ is a nonvanishing top form on $M$. Since any nonvanishing top form determines an orientation (see \cite[381]{lee:smooth_manifolds:2013}), we have that $M$ is orientable.
 \end{proof}
 
@@ -274,6 +283,50 @@ The other direction however is far more technical and uses results on partial di
 \end{proof}
 
 \section{K\"ahler Manifolds}
+
+\begin{appendix}
+\section{Tensor Characterization Lemma}
+
+\begin{theorem}[Tensor Characterization Lemma]
+A mapping
+\begin{equation*}
+\underbrace{\mathfrak{X}(M) \times \dots \times \mathfrak{X}(M)}_{k} \to \Cscr^\infty(M) \qquad \text{or} \qquad \underbrace{\mathfrak{X}(M) \times \dots \times \mathfrak{X}(M)}_{k} \to \Xfrak(M)
+\end{equation*}
+\noindent is induced by an element of $\Gamma(T^{(0,k)}TM)$ or $\Gamma(T^{(1,k)}TM)$, respectively, if and only if they are multilinear over $\Cscr^\infty(M)$.
+\end{theorem}
+
+\begin{proof}
+Let $A \in \Gamma(T^{(1,k)}TM)$. Since $T^{(1,k)}T_pM \cong L\del[1]{(T_pM)^k;T_pM}$ (see \cite[23]{kobayashi:diff_geo_I:1996}), we define a mapping $\Ascr: \mathfrak{X}(M) \times \dots \times \mathfrak{X}(M) \to \Xfrak(M)$ by
+\begin{equation*}
+\Ascr(X_1,\dots,X_k)_p := A_p(X_1\vert_p,\dots,X_k\vert_p) \in T_pM
+\end{equation*}
+\noindent where the smoothness follows from an adapted version of \cite[317--318]{lee:smooth_manifolds:2013}. Next we show that $\Ascr$ is multilinear over $\Cscr^\infty(M)$. Let $f \in \Cscr^\infty(M)$ and $X_\nu,\widetilde{X}_\nu \in \mathfrak{X}(M)$, $\nu = 1,\dots,k$. Then for any $p \in M$ we have that
+\begin{align*}
+\Ascr(X_1,\dots,fX_\nu + \widetilde{X}_\nu,\dots,X_k)_p =& A_p(X_1\vert_p,\dots,(fX_\nu + \widetilde{X}_\nu)_p,\dots,X_k\vert_p)\\
+=& A_p(X_1\vert_p,\dots,f(p)X_\nu\vert_p + \widetilde{X}_\nu\vert_p,\dots,X_k\vert_p)\\
+=& f(p)A_p(X_1\vert_p,\dots,X_\nu\vert_p ,\dots,X_k\vert_p)\\
+& + A_p(X_1\vert_p,\dots,\widetilde{X}_\nu\vert_p,\dots,X_k\vert_p)\\
+=& f(p) \Ascr(X_1,\dots,X_\nu,\dots,X_k)_p\\
+& + \Ascr(X_1,\dots,\widetilde{X}_\nu,\dots,X_k)_p\\
+=& \del[1]{f \Ascr(X_1,\dots,X_\nu,\dots,X_k)}_p \\
+& + \Ascr(X_1,\dots,\widetilde{X}_\nu,\dots,X_k)_p.
+\end{align*}
+Conversly, suppose that $\Ascr: \mathfrak{X}(M) \times \dots \times \mathfrak{X}(M) \to \Xfrak(M)$ is multilinear over $\Cscr^\infty(M)$. Let $p \in M$. First we show that $\Ascr$ acts locally, i.e. if $X_\nu = \widetilde{X}_\nu$ in some neighbourhood of $p$ implies that also 
+\begin{equation*}
+\Ascr(X_1,\dots,X_\nu,\dots,X_k) = \Ascr(X_1,\dots,\widetilde{X}_\nu,\dots,X_k)
+\end{equation*}
+\noindent on $U$. By the multilinearity of $\Ascr$ it is enough to show that if $X_\nu$ vanishes on $U$ then so does $\Ascr$. There exists a smooth bump function $\psi$ for $\cbr[0]{p}$ supported in $U$ (see \cite[44]{lee:smooth_manifolds:2013}). Hence $\psi X_\nu = 0$ on $M$ and $\psi(p) = 1$. Thus
+\begin{align*}
+0 = \Ascr(X_1,\dots,\psi X_\nu,\dots,X_k)_p = \psi(p)\Ascr(X_1,\dots,X_\nu,\dots,X_k)_p.
+\end{align*}
+\noindent and since $\psi(p) = 1$ we have that
+\begin{equation*}
+\Ascr(X_1,\dots,X_\nu,\dots,X_k)_p = 0
+\end{equation*}
+\noindent for any $p \in U$.
+\end{proof}
+
+\end{appendix}
 
 \printbibliography
 \end{document}
