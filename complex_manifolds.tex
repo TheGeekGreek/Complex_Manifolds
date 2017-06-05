@@ -265,7 +265,7 @@ N(X,Y) := \sbr[0]{JX,JY} - J\sbr[0]{X,JY} - J\sbr[0]{JX,Y} - \sbr[0]{X,Y}
 \end{definition}
 
 \begin{proposition}
-Let $(M,J)$ be an almost complex manifold and $N$ be the associated Nijenhuis tensor. Then $N \in \Gamma\del[1]{T^{(1,2)}TM}$.
+Let $(M,J)$ be an almost complex manifold and $N$ be the Nijenhuis tensor. Then $N \in \Gamma\del[1]{T^{(1,2)}TM}$.
 \label{prop:nijenhuis_tensor}
 \end{proposition}
 
@@ -296,6 +296,34 @@ The other direction however is far more technical and uses results on partial di
 \end{proof}
 
 \section{K\"ahler Manifolds}
+The following is inspired by \cite[146--149]{kobayashi:diff_geo_II:1996} and introduces the concepts from a complex viewpoint. This is in contrast to the symplectic approach provided for example in \cite{cannas:symplectic_geometry:2008}.
+\begin{definition}
+Let $(M,J)$ be an almost complex manifold. A \bld{Hermitian metric on $M$} is a Riemannian metric $g$ such that 
+\begin{equation}
+g(JX,JY) = g(X,Y)
+\end{equation} 
+\noindent holds for all $X,Y \in \Xfrak(M)$. If $g$ is a Hermitian metric on $M$, the triple $(M,J,g)$ is called an \bld{almost Hermitian manifold}.
+\end{definition}
+
+\begin{lemma}
+Every almost complex manifold admits a Hermitian metric.
+\end{lemma}
+
+\begin{proof}
+The existence was shown in the proof of proposition \ref{prop:almost_comp}.
+\end{proof}
+
+\begin{definition}
+Let $(M,J,g)$ be an almost Hermitian manifold. The \bld{fundamental $2$-form $\Omega$} is defined to be
+\begin{equation}
+\Omega(X,Y) := g(X,JY)
+\end{equation}
+\noindent for all $X,Y \in \Xfrak(M)$.
+\end{definition}
+
+\begin{definition}
+Let $(M,J,g)$ be an almost Hermitian manifold with fundamental $2$-form $\Omega$. The Hermitian metric is said to be a \bld{K\"ahler metric}, if $\d \Omega = 0$. An almost complex manifold with a K\"ahler metric is called an \bld{almost K\"ahler manifold} and a complex manifold with a K\"ahler metric is called a \bld{K\"ahler manifold}.
+\end{definition}
 
 \begin{appendix}
 \section{Tensor Characterization Lemma}
