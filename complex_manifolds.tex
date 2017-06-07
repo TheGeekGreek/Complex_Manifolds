@@ -4,8 +4,10 @@
 \DeclareMathOperator\End{End}
 \DeclareMathOperator\Hom{Hom}
 \DeclareMathOperator\Mat{Mat}
+\DeclareMathOperator\GL{GL}
 \newcommand{\Xfrak}{\mathfrak{X}}
 \newcommand{\Ascr}{\mathscr{A}}
+\newcommand{\Lup}{\mathrm{L}}
 
 \title{Complex Manifolds}
 \author{Yannis B\"ahni}
@@ -171,9 +173,9 @@ Then the discrete group $G$ acts freely and properly discontinuously on $\mathbb
 \end{examples}
 
 \begin{lemma}
-Let $V$ be a real vector space of dimension $n \in \mathbb{Z}$, $n \geq 1$. Then
+Let $n,k \in \mathbb{Z}$, $n,k \geq 1$. Let $V$ be an $n$-dimensional real vector space. Then
 \begin{equation}
-V \otimes V^* \cong \End(V)
+V \otimes \underbrace{V^* \otimes \dots \otimes V^*}_{k} \cong \Lup(\underbrace{V,\dots,V}_{k};V)
 \end{equation}
 \noindent canonically. If $(e_\nu)$ is a basis of $V$ and $(e_\nu^*)$ the corresponding basis of $V^*$, then $f \in \End(V)$ corresponds to
 \begin{equation}
@@ -186,12 +188,11 @@ V \otimes V^* \cong \End(V)
 It is easily checked that
 \begin{equation*}
 \Phi:\begin{cases} 
-V \times V^* \to \End(V)\\
-(v,f) \mapsto \del[1]{u \mapsto f(u)v}
+V \times V^* \times \dots \times V^* \to \Lup(V,\dots,V;V)\\
+(v,f_1,\dots,f_k) \mapsto \del[1]{(v_1,\dots,v_k) \mapsto f_1(v_1)\cdots f_k(v_k)v}
 \end{cases}
 \end{equation*}
-\noindent is bilinear. Thus by the universal property of the tensor product there exists a unique mapping $\widehat{\Phi} \in \Hom(V \otimes V^*; \End(V))$ such that $\Phi = \widehat{\Phi} \circ \otimes$. It is also easily checked that $\widehat{\Phi}$ is an isomorphism.\\
-Let $f \in \End(V)$. Then for any $v \in V$ we have
+\noindent is multilinear. Thus by the universal property of the tensor product there exists a unique mapping $\widehat{\Phi} \in \Hom\del[1]{V \times V^* \times \dots \times V^*; \Lup(V,\dots,V;V)}$ such that $\Phi = \widehat{\Phi} \circ \otimes$. It is also easily checked that $\widehat{\Phi}$ is an isomorphism. Let $f \in \End(V)$. Then for any $v \in V$ we have
 \begin{align*}
 \widehat{\Phi}\del[3]{\sum_{\nu = 1}^n f(e_\nu) \otimes e_\nu^*}(v) &= \sum_{\nu = 1}^n \widehat{\Phi}\del[1]{f(e_\nu) \otimes e_\nu^*}(v)\\
 &= \sum_{\nu = 1}^n e_\nu^*(v)f(e_\nu)\\
@@ -327,6 +328,113 @@ Let $(M,J,g)$ be an almost Hermitian manifold with fundamental $2$-form $\Omega$
 
 \begin{appendix}
 \section{Tensor Characterization Lemma}
+\begin{definition}
+Let $k,l \in \mathbb{Z}$, $k,l \geq 0$ and $M$ a smooth manifold. Then the \bld{bundle of mixed tensors of type $(k,l)$} is defined by
+\begin{equation}
+T^{(k,l)}TM := \coprod_{p \in M} T^{(k,l)}(T_pM).
+\end{equation}
+\end{definition}
+
+\begin{proposition}
+The bundle of mixed tensors of type $(k,l)$ has an unique natural structure as a smooth vector bundle of rank $n^{k + l}$ over $M$.
+\label{prop:smooth_bundle}
+\end{proposition}
+
+\begin{proof}
+For each $p \in M$ let $E_p := T^{(k,l)}(T_pM)$. By \cite[57]{lee:smooth_manifolds:2013} and \cite[313]{lee:smooth_manifolds:2013} $\dim E_p = n^{k + l}$. Furthermore, let $E := T^{(k,l)}TM$ and $\pi : E \to M$ be defined by $\pi(p,A) := p$. Let $\cbr[0]{(U_\alpha,\varphi_\alpha) : \alpha \in A}$ be an atlas for $M$. For each $\alpha \in A$ define
+\begin{equation*}
+\Phi_\alpha:\begin{cases}
+\pi^{-1}(U_\alpha) \to U_\alpha \times \mathbb{R}^{n^{k + l}}\\
+(p,A) \mapsto \del[1]{p,(A^{i_1\dots i_k}_{j_1\dots j_l})}
+\end{cases}
+\end{equation*}
+Clearly, the inverse is given by
+\begin{equation*}
+\Phi^{-1}_\alpha:\begin{cases}
+U_\alpha \times\mathbb{R}^{n^{k + l}} \to \pi^{-1}(U_\alpha)\\
+\del[1]{p,(A^{i_1\dots i_k}_{j_1\dots j_l})} \mapsto (p,A)
+\end{cases}.
+\end{equation*}
+Hence each $\Phi_\alpha$ is bijective. Now we have to check, that $\Phi_\alpha\vert_{E_p}$ is an isomorphism. So let $\lambda \in \mathbb{R}$ and $B \in E_p$. Then
+\begin{align*}
+\Phi_\alpha\vert_{E_p}(p,\lambda A + B) &= \del[1]{p,(\lambda A + B)^{i_1\dots i_k}_{j_1\dots j_l})}\\
+&= \del[1]{p,\lambda (A^{i_1\dots i_k}_{j_1\dots j_l}) + (B^{i_1\dots i_k}_{j_1\dots j_l})}\\
+&= \lambda\Phi_\alpha\vert_{E_p}(p,A) + \Phi_\alpha\vert_{E_p}(p,B).
+\end{align*}
+Now let $\alpha, \beta \in A$ such that $U_\alpha \cap U_\beta \neq \varnothing$. We consider the mapping
+\begin{equation*}
+\Phi_\alpha \circ \Phi_\beta^{-1} : (U_\alpha \cap U_\beta) \times \mathbb{R}^{n^{k + l}} \to (U_\alpha \cap U_\beta) \times \mathbb{R}^{n^{k + l}}.
+\end{equation*}
+Define $\tau_{\alpha\beta}: U_\alpha \cap U_\beta \to \GL(n^{k + l},\mathbb{R})$ by
+\begin{equation*}
+\tau_{\alpha\beta} := (\delta^i_j).
+\end{equation*}
+Then we have that
+\begin{equation*}
+(\Phi_\alpha \circ \Phi_\beta^{-1})\del[1]{p,(A^{i_1\dots i_k}_{j_1\dots j_l})} = \del[1]{p,(A^{i_1\dots i_k}_{j_1\dots j_l})} = \del[1]{p,\tau_{\alpha\beta}(p)(A^{i_1\dots i_k}_{j_1\dots j_l})}.
+\end{equation*}
+Since $\tau_{\alpha\beta}$ is constant, it is smooth (see \cite[36]{lee:smooth_manifolds:2013}). Hence we can apply the vector bundle chart lemma \cite[253]{lee:smooth_manifolds:2013} and the result follows.
+\end{proof}
+
+What follows is a reformulation of the smoothness criteria for tensor fields (\cite[317--318]{lee:smooth_manifolds:2013}) for tensor fields of type $(1,k)$.
+
+\begin{proposition}
+Let $M$ be a smooth manifold and let $A : M \to T^{(k,l)}TM$ be a rough section. Then $A \in \Gamma(T^{(k,l)}TM)$ if and only if in every smooth coordinate chart, the component functions of $A$ are smooth.
+\end{proposition}
+
+\begin{proof}
+Let $(U,(x^i))$ be a smooth chart. Proposition \ref{prop:smooth_bundle} together with the proof of the vector bundle chart lemma \cite[253--254]{lee:smooth_manifolds:2013} implies, that the corresponding chart on $T^{(k,l)}TM$ is given by $\del[1]{\pi^{-1}(U),\widetilde{\varphi}}$, where $\widetilde{\varphi}: \pi^{-1}(U) \to \varphi(U) \times \mathbb{R}^{n^{k+l}}$ is defined by
+\begin{equation*}
+\widetilde{\varphi} := (\varphi \times \id_{\mathbb{R}^{n^{k+l}}}) \circ \Phi
+\end{equation*}
+\noindent where $\Phi : \pi^{-1}(U) \to U \times \mathbb{R}^{n^{k + l}}$ is given as in the proof of proposition \ref{prop:smooth_bundle}. Now we consider the coordinate representation $\widehat{A}$ in the given charts (see \cite[35]{lee:smooth_manifolds:2013}). Since $A$ is a rough section, we have that 
+\begin{equation*}
+A^{-1}\del[1]{\pi^{-1}(U)} = (\pi \circ A)^{-1}(U) = \id_M^{-1}(U) = U.
+\end{equation*}
+Hence $\varphi\del[1]{U \cap A^{-1}(\pi^{-1}(U))} = \varphi(U)$, which is open, and $\widehat{A}: \varphi(U) \to \widetilde{\varphi}\del[1]{\pi^{-1}(U)}$ is given by
+\begin{align*}
+\widehat{A}(x) &= (\widetilde{\varphi} \circ A \circ \varphi^{-1})(x)\\
+&= (\varphi \times \id_{\mathbb{R}^{n^{k+l}}})\del[1]{\Phi(\varphi^{-1}(x),A_{\varphi^{-1}(x)})}\\
+&= (\varphi \times \id_{\mathbb{R}^{n^{k+l}}})\del[1]{\varphi^{-1}(x),\del[1]{A^{i_1\dots i_k}_{j_1\dots j_l}(\varphi^{-1}(x))}}\\
+&= \del[1]{x,\del[1]{\widehat{A}^{i_1\dots i_k}_{j_1\dots j_l}(x)}}.
+\end{align*}
+By \cite[35]{lee:smooth_manifolds:2013} $A$ is smooth if and only if in any chart $\widehat{A}$ is smooth. This is furthermore equivalent to that each $\widehat{A}^{i_1\dots i_k}_{j_1\dots j_l}$ is smooth and thus equivalent to that $A^{i_1\dots i_k}_{j_1\dots j_l}$ is smooth (see \cite[33]{lee:smooth_manifolds:2013}).
+\end{proof}
+ 
+\begin{proposition}
+Let $M$ be smooth manifold and let $A : M \to T^{(1,k)}TM$ be a rough section. Then $A \in \Gamma(T^{(1,k)}TM)$ if and only if for all $X_1,\dots,X_k \in \Xfrak(M)$, the rough section $A(X_1,\dots,X_k) : M \to TM$ defined by
+\begin{equation}
+A(X_1,\dots,X_k)(p) := A_p(X_1\vert_p,\dots,X_k\vert_p)
+\end{equation}
+\noindent is a smooth vector field.
+\end{proposition}
+
+\begin{proof}
+Let $(U,(x^i))$ be a smooth chart. Then write $X_1,\dots,X_k \in \Xfrak(M)$ as 
+\begin{equation*}
+X_\nu = X^{\mu_\nu}_\nu \frac{\partial}{\partial x^{\mu_\nu}}.
+\end{equation*}
+\noindent for $\nu = 1,\dots,k$. For $p \in U$ lemma \ref{lem:corr} implies
+\begin{align*}
+A(X_1,\dots,X_n)(p) &= A_p(X_1\vert_p,\dots,X_k\vert_p)\\
+&= A_p\del[3]{X^{\mu_1}_1(p) \frac{\partial}{\partial x^{\mu_1}}\bigg\vert_p,\dots,X^{\mu_k}_1(p) \frac{\partial}{\partial x^{\mu_k}}\bigg\vert_p}\\
+&= X^{\mu_1}_1(p) \cdots X^{\mu_k}_k(p)A_p\del[3]{\frac{\partial}{\partial x^{\mu_1}}\bigg\vert_p,\dots,\frac{\partial}{\partial x^{\mu_k}}\bigg\vert_p}\\
+&= X^{\mu_1}_1(p) \cdots X^{\mu_k}_k(p) A^i_{\mu_1 \dots \mu_k}(p)\frac{\partial}{\partial x^i}\bigg\vert_p.
+\end{align*}
+By the smoothness criterion for vector fields \cite[175]{lee:smooth_manifolds:2013} we have that each component function $X^{\mu_n}_\nu$ is smooth. Thus if $A$ is smooth, we have by  that each $A^i_{j_1\dots j_k}$ is smooth and since $\Cscr^\infty(M)$ is an $\mathbb{R}$-algebra (see \cite[33]{lee:smooth_manifolds:2013}), we have that 
+\begin{equation*}
+X^{\mu_1}_1 \cdots X^{\mu_k}_k A^i_{\mu_1 \dots \mu_k}
+\end{equation*} 
+\noindent is smooth for $i = 1,\dots,n$. Thus again by the smoothness criterion together with the localness of smoothness \cite[35]{lee:smooth_manifolds:2013} we get that $A(X_1,\dots,X_k) \in \Xfrak(M)$. Conversly, each vector field locally defined by 
+\begin{equation*}
+X_{j_\nu} = \delta^{\mu_\nu}_{j_\nu} \frac{\partial}{\partial x^{\mu_\nu}}.
+\end{equation*}
+\noindent is smooth. Thus by
+\begin{equation*}
+A(X_1,\dots,X_n)(p) = \delta^{\mu_1}_{j_1} \cdots \delta^{\mu_k}_{j_k} A^i_{\mu_1 \dots \mu_k}(p)\frac{\partial}{\partial x^i}\bigg\vert_p = A^i_{j_1\dots j_k}(p)\frac{\partial}{\partial x^i}\bigg\vert_p
+\end{equation*}
+\noindent we get that $A^i_{j_1 \dots j_k}$ is smooth and hence $A$.
+\end{proof}
 
 \begin{theorem}[Tensor Characterization Lemma]
 A mapping
