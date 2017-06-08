@@ -272,7 +272,7 @@ Let $(M,J)$ be an almost complex manifold and $N$ be the Nijenhuis tensor. Then 
 \end{proposition}
 
 \begin{proof}
-First of all, $N(X,Y) \in \mathfrak{X}(M)$ for all $X,Y \in \mathfrak{X}(M)$. This follows immediately by considering $J$ as a mapping $J : \mathfrak{X}(M) \to \mathfrak{X}(M)$ using the tensor characterization lemma \ref{prop:tensor_smooth}, the fact that the Lie Bracket of two smooth vector fields is again a smooth vector field (see \cite[186]{lee:smooth_manifolds:2013}) and that $\mathfrak{X}(M)$ is a $\Cscr^\infty(M)$-module (see \cite[177]{lee:smooth_manifolds:2013}). Let $f \in \Cscr^\infty(M)$ and $X,Y,Z \in \mathfrak{X}(M)$. Then
+First of all, $N(X,Y) \in \mathfrak{X}(M)$ for all $X,Y \in \mathfrak{X}(M)$. This follows immediately by considering $J$ as a mapping $J : \mathfrak{X}(M) \to \mathfrak{X}(M)$ using the tensor characterization lemma \ref{thm:tensor_char}, the fact that the Lie Bracket of two smooth vector fields is again a smooth vector field (see \cite[186]{lee:smooth_manifolds:2013}) and that $\mathfrak{X}(M)$ is a $\Cscr^\infty(M)$-module (see \cite[177]{lee:smooth_manifolds:2013}). Let $f \in \Cscr^\infty(M)$ and $X,Y,Z \in \mathfrak{X}(M)$. Then
 \begin{align*}
 N(fX + Y,Z) =& \sbr[0]{J(fX + Y),JZ} - J\sbr[0]{fX + Y,JZ} - J\sbr[0]{J(fX + Y),Z}\\
  &- \sbr[0]{fX + Y,Z}\\
@@ -285,7 +285,7 @@ N(fX + Y,Z) =& \sbr[0]{J(fX + Y),JZ} - J\sbr[0]{fX + Y,JZ} - J\sbr[0]{J(fX + Y),
 & + (Zf)X - \sbr[0]{Y,Z}\\
 =& fN(X,Z) + N(Y,Z).
 \end{align*}
-\noindent by \cite[187--188]{lee:smooth_manifolds:2013}. Linearity in the second argument is shown similarly. Hence $N : \mathfrak{X}(M) \times \mathfrak{X}(M) \to \mathfrak{X}(M)$ is bilinear over $\Cscr^\infty(M)$. So by \cite[26]{kobayashi:diff_geo_I:1996} we have that $N \in \Gamma\del[1]{T^{(1,2)}TM}$.
+\noindent by \cite[187--188]{lee:smooth_manifolds:2013}. Linearity in the second argument is shown similarly. Hence $N : \mathfrak{X}(M) \times \mathfrak{X}(M) \to \mathfrak{X}(M)$ is bilinear over $\Cscr^\infty(M)$. Again by the tensor characterization lemma \ref{thm:tensor_char} we have that $N \in \Gamma\del[1]{T^{(1,2)}TM}$.
 \end{proof}
 
 \begin{theorem}[Newlander-Nirenberg]
@@ -428,7 +428,7 @@ By the smoothness criterion for vector fields \cite[175]{lee:smooth_manifolds:20
 X^{\mu_1}_1 \cdots X^{\mu_k}_k A^i_{\mu_1 \dots \mu_k}
 \end{equation*} 
 \noindent is smooth for $i = 1,\dots,n$. Thus again by the smoothness criterion together with the localness of smoothness \cite[35]{lee:smooth_manifolds:2013} we get that $A(X_1,\dots,X_k) \in \Xfrak(M)$.\\
-To prove (c)$\Rightarrow$(f), we use that smoothness is a local property (see \cite[35]{lee:smooth_manifolds:2013}). Let $p \in U$.  Then by \cite[14]{cattaneo:manifolds:2017} we find a smooth bump function $\psi$ supported in $U$ and identically equal to $1$ on some neighbourhood $V$ of $p$. Set 
+To prove (c)$\Rightarrow$(d), we use that smoothness is a local property (see \cite[35]{lee:smooth_manifolds:2013}). Let $p \in U$.  Then by \cite[14]{cattaneo:manifolds:2017} we find a smooth bump function $\psi$ supported in $U$ and identically equal to $1$ on some neighbourhood $V$ of $p$. Set 
 \begin{align*}
 \widetilde{X}_i\vert_p := \begin{cases}
 \psi(p) X_i\vert_p & p \in \supp \psi\\
@@ -468,7 +468,7 @@ We are proving only the second statement. Any element in $\Gamma(T^{(1,k)}TM)$ i
 =& \del[1]{f \Ascr(X_1,\dots,X_\nu,\dots,X_k)}_p \\
 & + \Ascr(X_1,\dots,\widetilde{X}_\nu,\dots,X_k)_p.
 \end{align*}
-Conversly, suppose that $\Ascr: \mathfrak{X}(M) \times \dots \times \mathfrak{X}(M) \to \Xfrak(M)$ is multilinear over $\Cscr^\infty(M)$. Let $p \in M$. First we show that $\Ascr$ acts locally, i.e. if $X_\nu = \widetilde{X}_\nu$ in some neighbourhood of $p$ implies that also 
+Conversly, suppose that $\Ascr: \mathfrak{X}(M) \times \dots \times \mathfrak{X}(M) \to \Xfrak(M)$ is multilinear over $\Cscr^\infty(M)$. Let $p \in M$. First we show that $\Ascr$ acts locally, i.e. if $X_\nu = \widetilde{X}_\nu$ in some neighbourhood $U$ of $p$ implies that also 
 \begin{equation*}
 \Ascr(X_1,\dots,X_\nu,\dots,X_k) = \Ascr(X_1,\dots,\widetilde{X}_\nu,\dots,X_k)
 \end{equation*}
@@ -480,7 +480,16 @@ Conversly, suppose that $\Ascr: \mathfrak{X}(M) \times \dots \times \mathfrak{X}
 \begin{equation*}
 \Ascr(X_1,\dots,X_\nu,\dots,X_k)_p = 0
 \end{equation*}
-\noindent for any $p \in U$.
+\noindent for any $p \in U$.\\
+Next we show that $\Ascr$ actually acts pointwise, i.e. if $X_\nu\vert_p$ vanishes so does $\Ascr$. Let $(U,(x^i))$ be a chart containing $p$ and $X_\nu = X_\nu^i \frac{\partial}{\partial x^i}$ on $U$. The same construction as used showing the implication (c)$\Rightarrow$(d) in the proof of proposition \ref{prop:smoothness_tensor} yields the existence of $f^1,\dots,f^n \in \Cscr^\infty(M)$ and $\widetilde{X}_1,\dots,\widetilde{X}_n \in \Xfrak(M)$ such that $f^i = X_\nu^i$ and $\widetilde{X}_i = \frac{\partial}{\partial x^i}$ on a neighbourhood $V \subseteq U$ of $p$. Thus by the previous localization, we get that 
+\begin{equation*}
+\Ascr(X_1,\dots,X_\nu,\dots,X_k) = \Ascr(X_1,\dots,f^i\widetilde{X}_i,\dots,X_k) = f^i\Ascr(X_1,\dots,\widetilde{X}_i,\dots,X_k) 
+\end{equation*} 
+\noindent in $U$. Since $0 = X_\nu^i(p) = f^i(p)$, $\Ascr$ vanishes at $p$. Hence $\Ascr$ depends only on the value of $X_\nu$ at $p$. Thus define a rough section $A : M \to T^{(1,k)}TM$ by 
+\begin{equation*}
+A_p(v_1,\dots,v_k) := \Ascr(V_1,\dots,V_k)(p)
+\end{equation*}
+\noindent where $V_1,\dots,V_k \in \Xfrak(M)$ are any extensions of $v_1,\dots,v_k \in T_pM$ (see \cite[177]{lee:smooth_manifolds:2013}). By the above, the choice of the extensions does not matter and the resulting rough section is smooth by proposition \ref{prop:smoothness_tensor} part (c), hence $A \in \Gamma(T^{(1,k)}TM)$.
 \end{proof}
 
 \end{appendix}
