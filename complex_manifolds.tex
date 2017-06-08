@@ -5,6 +5,7 @@
 \DeclareMathOperator\Hom{Hom}
 \DeclareMathOperator\Mat{Mat}
 \DeclareMathOperator\GL{GL}
+\DeclareMathOperator\supp{supp}
 \newcommand{\Xfrak}{\mathfrak{X}}
 \newcommand{\Ascr}{\mathscr{A}}
 \newcommand{\Lup}{\mathrm{L}}
@@ -122,7 +123,7 @@ Since $M$ is a smooth manifold, there exists a Riemannian metric $g$ on $M$ (see
 \begin{equation*}
 \widetilde{g}(X,Y) := g(X,Y) + g(JX,JY) \in \Gamma(T^{(0,2)}TM)
 \end{equation*}
-\noindent for all $X,Y \in \mathfrak{X}(M)$. Then
+\noindent for all $X,Y \in \mathfrak{X}(M)$. This is possible due to the tensor characterization lemma \ref{thm:tensor_char}. Then
 \begin{equation*}
 \widetilde{g}(JX,JY) = g(JX,JY) + g(-X,-Y) = g(JX,JY) + g(X,Y) = \widetilde{g}(X,Y)
 \end{equation*}
@@ -245,7 +246,7 @@ Left to check is smoothness. According to lemma \ref{lem:corr} the corresponding
 \begin{equation*}
 J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} \otimes \d x^\nu\vert_p + J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p} \otimes \d y^\nu\vert_p = \frac{\partial}{\partial y^\nu}\bigg\vert_p \otimes \d x^\nu\vert_p - \frac{\partial}{\partial x^\nu}\bigg\vert_p \otimes \d y^\nu\vert_p
 \end{equation*}
-\noindent for any $p \in U$. Thus the smoothness criteria for tensor fields \cite[317--318]{lee:smooth_manifolds:2013} together with \cite[36]{lee:smooth_manifolds:2013} yields that $J \in \Gamma\del[1]{T^{(1,1)}TM}$.
+\noindent for any $p \in U$. Thus the smoothness criteria for tensor fields \ref{prop:tensor_smooth} together with \cite[36]{lee:smooth_manifolds:2013} yields that $J \in \Gamma\del[1]{T^{(1,1)}TM}$.
 \end{proof}
 
 A question which naturally arises by considering proposition \ref{prop:complex_is_almost} is, if the converse is also true, i.e. if every almost complex manifold is a complex manifold. This is in general not the case. Let $\mathbb{P}$ denote the naturally oriented underlying smooth manifold of the complex projective plane. Again using results about Chern numbers it can be shown that
@@ -271,7 +272,7 @@ Let $(M,J)$ be an almost complex manifold and $N$ be the Nijenhuis tensor. Then 
 \end{proposition}
 
 \begin{proof}
-First of all, $N(X,Y) \in \mathfrak{X}(M)$ for all $X,Y \in \mathfrak{X}(M)$. This follows immediately by considering $J$ as a mapping $J : \mathfrak{X}(M) \to \mathfrak{X}(M)$ (see \cite[26]{kobayashi:diff_geo_I:1996}), the fact that the Lie Bracket of two smooth vector fields is again a smooth vector field (see \cite[186]{lee:smooth_manifolds:2013}) and that $\mathfrak{X}(M)$ is a $\Cscr^\infty(M)$-module (see \cite[177]{lee:smooth_manifolds:2013}). Let $f \in \Cscr^\infty(M)$ and $X,Y,Z \in \mathfrak{X}(M)$. Then
+First of all, $N(X,Y) \in \mathfrak{X}(M)$ for all $X,Y \in \mathfrak{X}(M)$. This follows immediately by considering $J$ as a mapping $J : \mathfrak{X}(M) \to \mathfrak{X}(M)$ using the tensor characterization lemma \ref{prop:tensor_smooth}, the fact that the Lie Bracket of two smooth vector fields is again a smooth vector field (see \cite[186]{lee:smooth_manifolds:2013}) and that $\mathfrak{X}(M)$ is a $\Cscr^\infty(M)$-module (see \cite[177]{lee:smooth_manifolds:2013}). Let $f \in \Cscr^\infty(M)$ and $X,Y,Z \in \mathfrak{X}(M)$. Then
 \begin{align*}
 N(fX + Y,Z) =& \sbr[0]{J(fX + Y),JZ} - J\sbr[0]{fX + Y,JZ} - J\sbr[0]{J(fX + Y),Z}\\
  &- \sbr[0]{fX + Y,Z}\\
@@ -378,12 +379,24 @@ Since $\tau_{\alpha\beta}$ is constant, it is smooth (see \cite[36]{lee:smooth_m
 
 What follows is a reformulation of the smoothness criteria for tensor fields (\cite[317--318]{lee:smooth_manifolds:2013}) for tensor fields of type $(1,k)$.
 
-\begin{proposition}
-Let $M$ be a smooth manifold and let $A : M \to T^{(k,l)}TM$ be a rough section. Then $A \in \Gamma(T^{(k,l)}TM)$ if and only if in every smooth coordinate chart, the component functions of $A$ are smooth.
+\begin{proposition}[Smoothness Criteria for Tensor Fields]
+Let $M$ be smooth manifold and let $A : M \to T^{(1,k)}TM$ be a rough section. Then the following are equivalent:
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item $A \in \Gamma(T^{(1,k)}TM)$.
+\item In every smooth coordinate chart, the component functions of $A$ are smooth.
+\item For all $X_1,\dots,X_k \in \Xfrak(M)$, the rough section $A(X_1,\dots,X_k) : M \to TM$ defined by
+\begin{equation}
+A(X_1,\dots,X_k)(p) := A_p(X_1\vert_p,\dots,X_k\vert_p)
+\end{equation}
+\noindent is a smooth vector field.
+\item If $X_1,\dots,X_k$ are smooth vector fields on some open subset $U \subseteq M$, then also $A(X_1,\dots,X_k)$ is a smooth vector field on $U$.
+\end{enumerate}
+\label{prop:smoothness_tensor}
 \end{proposition}
 
 \begin{proof}
-Let $(U,(x^i))$ be a smooth chart. Proposition \ref{prop:smooth_bundle} together with the proof of the vector bundle chart lemma \cite[253--254]{lee:smooth_manifolds:2013} implies, that the corresponding chart on $T^{(k,l)}TM$ is given by $\del[1]{\pi^{-1}(U),\widetilde{\varphi}}$, where $\widetilde{\varphi}: \pi^{-1}(U) \to \varphi(U) \times \mathbb{R}^{n^{k+l}}$ is defined by
+We prove (a)$\Leftrightarrow$(b) and (b)$\Rightarrow$(c)$\Rightarrow$(d)$\Rightarrow$(b).\\
+To prove (a)$\Leftrightarrow$(b), let $(U,(x^i))$ be a smooth chart. Proposition \ref{prop:smooth_bundle} together with the proof of the vector bundle chart lemma \cite[253--254]{lee:smooth_manifolds:2013} implies, that the corresponding chart on $T^{(k,l)}TM$ is given by $\del[1]{\pi^{-1}(U),\widetilde{\varphi}}$, where $\widetilde{\varphi}: \pi^{-1}(U) \to \varphi(U) \times \mathbb{R}^{n^{k+l}}$ is defined by
 \begin{equation*}
 \widetilde{\varphi} := (\varphi \times \id_{\mathbb{R}^{n^{k+l}}}) \circ \Phi
 \end{equation*}
@@ -398,19 +411,8 @@ Hence $\varphi\del[1]{U \cap A^{-1}(\pi^{-1}(U))} = \varphi(U)$, which is open, 
 &= (\varphi \times \id_{\mathbb{R}^{n^{k+l}}})\del[1]{\varphi^{-1}(x),\del[1]{A^{i_1\dots i_k}_{j_1\dots j_l}(\varphi^{-1}(x))}}\\
 &= \del[1]{x,\del[1]{\widehat{A}^{i_1\dots i_k}_{j_1\dots j_l}(x)}}.
 \end{align*}
-By \cite[35]{lee:smooth_manifolds:2013} $A$ is smooth if and only if in any chart $\widehat{A}$ is smooth. This is furthermore equivalent to that each $\widehat{A}^{i_1\dots i_k}_{j_1\dots j_l}$ is smooth and thus equivalent to that $A^{i_1\dots i_k}_{j_1\dots j_l}$ is smooth (see \cite[33]{lee:smooth_manifolds:2013}).
-\end{proof}
- 
-\begin{proposition}
-Let $M$ be smooth manifold and let $A : M \to T^{(1,k)}TM$ be a rough section. Then $A \in \Gamma(T^{(1,k)}TM)$ if and only if for all $X_1,\dots,X_k \in \Xfrak(M)$, the rough section $A(X_1,\dots,X_k) : M \to TM$ defined by
-\begin{equation}
-A(X_1,\dots,X_k)(p) := A_p(X_1\vert_p,\dots,X_k\vert_p)
-\end{equation}
-\noindent is a smooth vector field.
-\end{proposition}
-
-\begin{proof}
-Let $(U,(x^i))$ be a smooth chart. Then write $X_1,\dots,X_k \in \Xfrak(M)$ as 
+By \cite[35]{lee:smooth_manifolds:2013} $A$ is smooth if and only if in any chart $\widehat{A}$ is smooth. This is furthermore equivalent to that each $\widehat{A}^{i_1\dots i_k}_{j_1\dots j_l}$ is smooth and thus equivalent to that $A^{i_1\dots i_k}_{j_1\dots j_l}$ is smooth (see \cite[33]{lee:smooth_manifolds:2013}).\\
+To prove (b)$\Rightarrow$(c), let $(U,(x^i))$ be a smooth chart. Then write $X_1,\dots,X_k \in \Xfrak(M)$ as 
 \begin{equation*}
 X_\nu = X^{\mu_\nu}_\nu \frac{\partial}{\partial x^{\mu_\nu}}.
 \end{equation*}
@@ -425,7 +427,16 @@ By the smoothness criterion for vector fields \cite[175]{lee:smooth_manifolds:20
 \begin{equation*}
 X^{\mu_1}_1 \cdots X^{\mu_k}_k A^i_{\mu_1 \dots \mu_k}
 \end{equation*} 
-\noindent is smooth for $i = 1,\dots,n$. Thus again by the smoothness criterion together with the localness of smoothness \cite[35]{lee:smooth_manifolds:2013} we get that $A(X_1,\dots,X_k) \in \Xfrak(M)$. Conversly, each vector field locally defined by 
+\noindent is smooth for $i = 1,\dots,n$. Thus again by the smoothness criterion together with the localness of smoothness \cite[35]{lee:smooth_manifolds:2013} we get that $A(X_1,\dots,X_k) \in \Xfrak(M)$.\\
+To prove (c)$\Rightarrow$(f), we use that smoothness is a local property (see \cite[35]{lee:smooth_manifolds:2013}). Let $p \in U$.  Then by \cite[14]{cattaneo:manifolds:2017} we find a smooth bump function $\psi$ supported in $U$ and identically equal to $1$ on some neighbourhood $V$ of $p$. Set 
+\begin{align*}
+\widetilde{X}_i\vert_p := \begin{cases}
+\psi(p) X_i\vert_p & p \in \supp \psi\\
+0 & p \in M \setminus \supp \psi
+\end{cases}.
+\end{align*}
+Then the gluing lemma for smooth maps \cite[35]{lee:smooth_manifolds:2013} implies $X_1,\dots,X_k \in \Xfrak(M)$. Hence by (c) we get that $A(\widetilde{X}_1,\dots,\widetilde{X}_k) \in \Xfrak(M)$ and so the restriction $A(\widetilde{X}_1,\dots,\widetilde{X}_k)\vert_V$ is smooth. But $A(\widetilde{X}_1,\dots,\widetilde{X}_k)\vert_V = A(X_1,\dots,X_k)$ and so we are done.\\
+Lasty to prove (d)$\Rightarrow$(b), each vector field locally defined by 
 \begin{equation*}
 X_{j_\nu} = \delta^{\mu_\nu}_{j_\nu} \frac{\partial}{\partial x^{\mu_\nu}}.
 \end{equation*}
@@ -433,7 +444,7 @@ X_{j_\nu} = \delta^{\mu_\nu}_{j_\nu} \frac{\partial}{\partial x^{\mu_\nu}}.
 \begin{equation*}
 A(X_1,\dots,X_n)(p) = \delta^{\mu_1}_{j_1} \cdots \delta^{\mu_k}_{j_k} A^i_{\mu_1 \dots \mu_k}(p)\frac{\partial}{\partial x^i}\bigg\vert_p = A^i_{j_1\dots j_k}(p)\frac{\partial}{\partial x^i}\bigg\vert_p
 \end{equation*}
-\noindent we get that $A^i_{j_1 \dots j_k}$ is smooth and hence $A$.
+\noindent we get that $A^i_{j_1 \dots j_k}$ is smooth and hence by (b) also $A$.
 \end{proof}
 
 \begin{theorem}[Tensor Characterization Lemma]
@@ -442,14 +453,11 @@ A mapping
 \underbrace{\mathfrak{X}(M) \times \dots \times \mathfrak{X}(M)}_{k} \to \Cscr^\infty(M) \qquad \text{or} \qquad \underbrace{\mathfrak{X}(M) \times \dots \times \mathfrak{X}(M)}_{k} \to \Xfrak(M)
 \end{equation*}
 \noindent is induced by an element of $\Gamma(T^{(0,k)}TM)$ or $\Gamma(T^{(1,k)}TM)$, respectively, if and only if they are multilinear over $\Cscr^\infty(M)$.
+\label{thm:tensor_char}
 \end{theorem}
 
 \begin{proof}
-Let $A \in \Gamma(T^{(1,k)}TM)$. Since $T^{(1,k)}T_pM \cong L\del[1]{(T_pM)^k;T_pM}$ (see \cite[23]{kobayashi:diff_geo_I:1996}), we define a mapping $\Ascr: \mathfrak{X}(M) \times \dots \times \mathfrak{X}(M) \to \Xfrak(M)$ by
-\begin{equation*}
-\Ascr(X_1,\dots,X_k)_p := A_p(X_1\vert_p,\dots,X_k\vert_p) \in T_pM
-\end{equation*}
-\noindent where the smoothness follows from an adapted version of \cite[317--318]{lee:smooth_manifolds:2013}. Next we show that $\Ascr$ is multilinear over $\Cscr^\infty(M)$. Let $f \in \Cscr^\infty(M)$ and $X_\nu,\widetilde{X}_\nu \in \mathfrak{X}(M)$, $\nu = 1,\dots,k$. Then for any $p \in M$ we have that
+We are proving only the second statement. Any element in $\Gamma(T^{(1,k)}TM)$ induces a mapping $\mathfrak{X}(M) \times \dots \times \mathfrak{X}(M) \to \Xfrak(M)$ by part (c) of the smoothness criteria for tensor fields \ref{prop:smoothness_tensor}. Thus we have to show that $\Ascr$ is multilinear over $\Cscr^\infty(M)$. Let $f \in \Cscr^\infty(M)$ and $X_\nu,\widetilde{X}_\nu \in \mathfrak{X}(M)$, $\nu = 1,\dots,k$. Then for any $p \in M$ we have that
 \begin{align*}
 \Ascr(X_1,\dots,fX_\nu + \widetilde{X}_\nu,\dots,X_k)_p =& A_p(X_1\vert_p,\dots,(fX_\nu + \widetilde{X}_\nu)_p,\dots,X_k\vert_p)\\
 =& A_p(X_1\vert_p,\dots,f(p)X_\nu\vert_p + \widetilde{X}_\nu\vert_p,\dots,X_k\vert_p)\\
