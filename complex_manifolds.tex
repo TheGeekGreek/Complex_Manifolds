@@ -12,7 +12,7 @@
 
 \title{Complex Manifolds}
 \author{Yannis B\"ahni}
-\address[Yannis B\"ahni]{Universität Zürich, R\"amistrasse 71, 8006 Zurich}
+\address[Yannis B\"ahni]{University of Zurich, R\"amistrasse 71, 8006 Zurich}
 \email[Yannis B\"ahni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
 
 \begin{document}
@@ -24,66 +24,8 @@ Goal of this paper is to give an overview of the basic definitions of complex an
 
 \tableofcontents
 
-\section{Functions of Several Complex Variables}
-This section summarizes the fundamental properties of functions of several complex variables needed later. The results are inspired by \cite[14--30]{grauert:complex_manifolds:2010}.
-
-\begin{definition}
-Let $n \in \mathbb{Z}$, $n \geq 1$, $U \subseteq \mathbb{C}^n$ open and $a \in U$. A mapping $f : U \to \mathbb{C}$ is said to be \bld{complex differentiable at $a$} if there exists $g : U \to \mathbb{C}^n$ such that $g$ is continuous at $a$ and
-\begin{equation}
-f(z) = f(a) + \sum_{\nu = 1}^n(z_\nu - a_\nu)g_\nu(z)
-\end{equation} 
-\noindent holds for all $z \in D$. $f$ is said to be \bld{holomorphic in $D$} if it is complex differentiable at every point $a \in D$. For $m \in \mathbb{Z}$, $m \geq 1$, a mapping $f : U \to \mathbb{C}^m$ is said to be holomorphic in $D$ if each component function $f_\nu$, $\nu = 1,\dots,n$, is holomorphic in $D$.
-\label{def:holomorphic}
-\end{definition}
-
-\begin{proposition}
-Let $n \in \mathbb{Z}$, $n \geq 1$, $D \subseteq \mathbb{C}^n$ open, $a \in U$ and $f : D \to \mathbb{C}$ real differentiable at $a$. Then
-\begin{equation}
-\frac{\partial f}{\partial z_\nu}(a) = \frac{1}{2}\del[3]{\frac{\partial f}{\partial x_\nu}(a) - i \frac{\partial f}{\partial y_\nu}(a)} 
-\end{equation}
-\noindent and
-\begin{equation}
-\frac{\partial f}{\partial \overline{z}_\nu}(a) = \frac{1}{2}\del[3]{\frac{\partial f}{\partial x_\nu}(a) + i \frac{\partial f}{\partial y_\nu}(a)}
-\end{equation}  
-\noindent holds for all $\nu = 1,\dots,n$.
-\label{prop:Wirtinger}
-\end{proposition}
-
-\begin{theorem}[The Cauchy-Riemann Equations]
-Let $n \in \mathbb{Z}$, $n \geq 1$ and $D \subseteq \mathbb{C}^n$ open. A mapping $f: D \to \mathbb{C}$ is holomorphic in $D$ if and only if it is real differentiable at every $a \in D$ and the \bld{Cauchy-Riemann equations}
-\begin{equation}
-\frac{\partial f}{\partial \overline{z}_\nu}(a) = 0 
-\end{equation}
-\noindent holds for all $a \in D$ and $\nu = 1,\dots,n$.
-\label{thm:CR}
-\end{theorem}
-
-\begin{corollary}
-Let $m,n \in \mathbb{Z}$, $m,n \geq 1$, $D \subseteq \mathbb{C}^n$ open and $f: D \to \mathbb{C}^m$ holomorphic in $D$. If $f = g + ih$, $g,h : D \to \mathbb{R}^m$, then 
-\begin{equation}
-\boxed{\frac{\partial g_\mu}{\partial x_\nu}(a) = \frac{\partial h_\mu}{\partial y_\nu}(a) \qquad \text{and} \qquad \frac{\partial h_\mu}{\partial x_\nu}(a) = -\frac{\partial g_\mu}{\partial y_\nu}(a)}
-\end{equation} 
-\noindent holds for any $a \in D$, $\nu = 1,\dots,n$ and $\mu = 1,\dots,m$.
-\label{cor:CRreal}
-\end{corollary}
-
-\begin{proof}
-Fix $\mu = 1,\dots,m$. By definition \ref{def:holomorphic} $f_\mu$ is holomorphic in $D$. Hence $f_\mu$ is real differentiable in $D$ (see \cite[27]{grauert:complex_manifolds:2010}) and theorem \ref{thm:CR} implies
-\begin{equation*}
-\frac{\partial f_\mu}{\partial \overline{z}_\nu}(a) = 0
-\end{equation*}
-\noindent for all $a \in D$ and $\nu = 1,\dots,n$. By proposition \ref{prop:Wirtinger}, this is equivalent to 
-\begin{equation*}
-\frac{\partial f}{\partial x_\nu}(a) + i \frac{\partial f}{\partial y_\nu}(a) = 0.
-\end{equation*}
-Using $f_\mu = g_\mu + i h_\mu$ and the $\mathbb{C}$-linearity of the operators $\frac{\partial}{\partial x_\nu}$ and $\frac{\partial}{\partial y_\nu}$ yields
-\begin{equation*}
-\frac{\partial g_\mu}{\partial x_\nu}(a) - \frac{\partial h_\mu}{\partial y_\nu}(a) + i \del[3]{ \frac{\partial h_\mu}{\partial x_\nu}(a) + \frac{\partial g_\mu}{\partial y_\nu}(a)} = 0.
-\end{equation*}
-\end{proof}
-
 \section{Complex Structures on Vector Spaces}
-In what follows, let $n \in \mathbb{Z}$, $n \geq 1$. Consider an $n$-dimensional complex vector space and let $J \in \End_\mathbb{C}(V)$ be defined by $J(v) := iv$. Then clearly $J \circ J = -\id_V$. Since every $n$-dimensional complex vector space can be seen as a $2n$-dimensional real vector space in a natural way, i.e. if $(e_\nu)$ is a basis for the complex vector space $V$, then $(e_\nu,ie_\nu)$ is a basis for the real vector space $V$, the mapping $J$ induces an $\mathbb{R}$-endomorphism $J$ on the real vector space $V$ simply by $J(e_\nu) = ie_\nu$ and $J(ie_\nu) = -e_\nu$ for all $\nu = 1,\dots,n$.\\
+In what follows, let $n \in \mathbb{Z}$, $n \geq 1$. Consider an $n$-dimensional complex vector space and let $J \in \End_\mathbb{C}(V)$ be defined by $J(v) := iv$. Then clearly $J \circ J = -\id_V$. Since every $n$-dimensional complex vector space can be seen as a $2n$-dimensional real vector space in a natural way, i.e. if $(e_\nu)$ is a basis for the complex vector space $V$, then $(e_\nu,ie_\nu)$ is a basis for the real vector space $V$, the mapping $J$ induces an $\mathbb{R}$-endomorphism $\widetilde{J}$ on the real vector space $V$ simply by defining $\widetilde{J}(e_\nu) := J(e_\nu) = ie_\nu$ and $\widetilde{J}(ie_\nu) := J(ie_\nu) = -e_\nu$ for all $\nu = 1,\dots,n$.\\
 Conversly, let $V$ be an $n$-dimensional real vector space with $J \in \End_\mathbb{R}(V)$ such that $J \circ J = -\id_V$. One can show, that 
 \begin{equation}
 zv := xv + yJ(v)
@@ -91,7 +33,7 @@ zv := xv + yJ(v)
 \end{equation}
 \noindent for $z := x + iy \in \mathbb{C}$ and $v \in V$ makes $V$ into a complex vector space. This motivates the following definition.
 \begin{definition}
-Let $V$ be an $n$-dimensional real vector space. A \bld{complex structure on $V$} is a $\mathbb{R}$-linear mapping $J: V \to V$ such that $J \circ J = -\id_V$. If $J$ is a complex structure on $V$, the tuple $(V,J)$ is called a \bld{complex vector space}.
+Let $n \in \mathbb{Z}$, $n \geq 1$ and $V$ be an $n$-dimensional real vector space. A \bld{complex structure on $V$} is a $\mathbb{R}$-linear mapping $J: V \to V$ such that $J \circ J = -\id_V$. If $J$ is a complex structure on $V$, the tuple $(V,J)$ is called a \bld{complex vector space}.
 \end{definition}
 
 \begin{lemma}
@@ -102,14 +44,15 @@ Let $(V,J)$ be a complex vector space. Then $\dim V$ is even.
 \begin{proof}
 That $\dim V$ must be even follows directly from
 \begin{equation*}
-\del[1]{\det(J)}^2 = \det(J \circ J) = \det(-\id_V) = (-1)^{\dim V} \det(\id_V) = (-1)^{\dim V}.
+\del[1]{\det(J)}^2 = \det(J \circ J) = \det(-\id_V) = (-1)^{\dim V} \det(\id_V) = (-1)^{\dim V}
 \end{equation*} 
+\noindent since $\det(J) \in \mathbb{R}$.
 \end{proof}
 
 \section{Almost Complex Structures}
 If $M$ is a smooth manifold, then $T_pM$ is a finite dimensional real vector space. Hence we can generalize the definitions and results of the previous section to manifolds. The following definition is taken from \cite[86]{cannas:symplectic_geometry:2008}.
 \begin{definition}
-Let $M$ be a smooth manifold. An \bld{almost complex structure on $M$} is a smooth tensor field $J \in \Gamma\del[1]{T^{(1,1)}TM}$ such that $J_p \circ J_p = -\id_{T_pM}$ holds for any $p \in M$. If $J$ is an almost complex structure on $M$, the tuple $(M,J)$ is called an \bld{almost complex manifold}.
+Let $M$ be a smooth manifold. An \bld{almost complex structure on $M$} is a smooth tensor field $J \in \Gamma\del[1]{T^{(1,1)}TM}$ such that $J_p \circ J_p = -\id_{T_pM}$ holds for every $p \in M$. If $J$ is an almost complex structure on $M$, the tuple $(M,J)$ is called an \bld{almost complex manifold}.
 \end{definition}
 
 \begin{proposition}
@@ -135,7 +78,7 @@ Then by
 \begin{equation*}
 \omega(Y,X) = \widetilde{g}(Y,JX) = \widetilde{g}(JX,Y) = \widetilde{g}(-X,JY) = -\omega(X,Y)
 \end{equation*}
-\noindent we see that $\omega$ is skew-symmetric. Hence $\omega \in \Omega^2(M)$. Let $p \in M$ and $u \in T_pM \setminus \cbr{0}$. Then also $-J_p(u) \neq 0$ since $J_p$ is invertible since $\det J_p = 1$. Furthermore, by \cite[177]{lee:smooth_manifolds:2013}, there exist $X,Y \in \Xfrak(M)$, such that $X_p = u$ and $Y_p = -J_p(u)$. Hence
+\noindent we see that $\omega$ is skew-symmetric. Hence $\omega \in \Omega^2(M)$. Let $p \in M$ and $u \in T_pM \setminus \cbr{0}$. Then also $-J_p(u) \neq 0$ since $J_p$ is invertible by $\det J_p = 1$. Furthermore, by \cite[177]{lee:smooth_manifolds:2013}, there exist $X,Y \in \Xfrak(M)$, such that $X_p = u$ and $Y_p = -J_p(u)$. Hence
 \begin{align*}
 \omega_p\del[1]{u,-J_p(u)} &= \omega_p(X_p,Y_p)\\
 &= \omega(X,Y)(p)\\
@@ -157,7 +100,7 @@ The converse of proposition \ref{prop:almost_comp} is not true in general. One c
 The definition of smooth manifolds adapts smoothly to the complex case.
 
 \begin{definition}
-Let $n \in \mathbb{Z}$, $n \geq 1$. An \bld{$n$-dimensional complex manifold} is a second countable Hausdorff space $M$ equipped with a holomorphic structure, that is a maximal holomorphic atlas $\cbr[0]{(U_\alpha, \varphi_\alpha) : \alpha \in A}$ of complex charts $(U_\alpha,\varphi_\alpha)$, such that all the transition maps are holomorphic.
+Let $n \in \mathbb{Z}$, $n \geq 1$. An \bld{$n$-dimensional complex manifold} is a second countable Hausdorff space $M$ equipped with a holomorphic structure, that is a maximal holomorphic atlas of complex charts, such that all the transition maps are holomorphic.
 \end{definition}
 
 \begin{examples}[Complex Manifolds]
@@ -188,14 +131,14 @@ V \otimes \underbrace{V^* \otimes \dots \otimes V^*}_{k} \cong \Lup(\underbrace{
 \begin{proof}
 It is easily checked that
 \begin{equation*}
-\Phi:\begin{cases} 
+\Psi:\begin{cases} 
 V \times V^* \times \dots \times V^* \to \Lup(V,\dots,V;V)\\
 (v,f_1,\dots,f_k) \mapsto \del[1]{(v_1,\dots,v_k) \mapsto f_1(v_1)\cdots f_k(v_k)v}
 \end{cases}
 \end{equation*}
-\noindent is multilinear. Thus by the universal property of the tensor product there exists a unique mapping $\widehat{\Phi} \in \Hom\del[1]{V \times V^* \times \dots \times V^*; \Lup(V,\dots,V;V)}$ such that $\Phi = \widehat{\Phi} \circ \otimes$. It is also easily checked that $\widehat{\Phi}$ is an isomorphism. Let $f \in \End(V)$. Then for any $v \in V$ we have
+\noindent is multilinear. Thus by the universal property of the tensor product there exists a unique linear mapping $\widetilde{\Psi} \in \Hom_\mathbb{R}\del[1]{T^{(1,k)}(V); \Lup(V,\dots,V;V)}$ such that $\Psi = \widetilde{\Psi} \circ \otimes$. It is also easily checked that $\widetilde{\Psi}$ is an isomorphism. Let $f \in \End(V)$. Then for any $v \in V$ we have
 \begin{align*}
-\widehat{\Phi}\del[3]{\sum_{\nu = 1}^n f(e_\nu) \otimes e_\nu^*}(v) &= \sum_{\nu = 1}^n \widehat{\Phi}\del[1]{f(e_\nu) \otimes e_\nu^*}(v)\\
+\widetilde{\Psi}\del[3]{\sum_{\nu = 1}^n f(e_\nu) \otimes e_\nu^*}(v) &= \sum_{\nu = 1}^n \widetilde{\Psi}\del[1]{f(e_\nu) \otimes e_\nu^*}(v)\\
 &= \sum_{\nu = 1}^n e_\nu^*(v)f(e_\nu)\\
 &= f\del[3]{\sum_{\nu = 1}^n e_\nu^*(v)e_\nu}\\
 &= f(v).
@@ -246,7 +189,7 @@ Left to check is smoothness. According to lemma \ref{lem:corr} the corresponding
 \begin{equation*}
 J_p\del[3]{\frac{\partial}{\partial x^\nu}\bigg\vert_p} \otimes \d x^\nu\vert_p + J_p\del[3]{\frac{\partial}{\partial y^\nu}\bigg\vert_p} \otimes \d y^\nu\vert_p = \frac{\partial}{\partial y^\nu}\bigg\vert_p \otimes \d x^\nu\vert_p - \frac{\partial}{\partial x^\nu}\bigg\vert_p \otimes \d y^\nu\vert_p
 \end{equation*}
-\noindent for any $p \in U$. Thus the smoothness criteria for tensor fields \ref{prop:tensor_smooth} together with \cite[36]{lee:smooth_manifolds:2013} yields that $J \in \Gamma\del[1]{T^{(1,1)}TM}$.
+\noindent for any $p \in U$. Thus the smoothness criteria for tensor fields \ref{prop:smoothness_tensor} together with \cite[36]{lee:smooth_manifolds:2013} yields that $J \in \Gamma\del[1]{T^{(1,1)}TM}$.
 \end{proof}
 
 A question which naturally arises by considering proposition \ref{prop:complex_is_almost} is, if the converse is also true, i.e. if every almost complex manifold is a complex manifold. This is in general not the case. Let $\mathbb{P}$ denote the naturally oriented underlying smooth manifold of the complex projective plane. Again using results about Chern numbers it can be shown that
@@ -328,6 +271,63 @@ Let $(M,J,g)$ be an almost Hermitian manifold with fundamental $2$-form $\Omega$
 \end{definition}
 
 \begin{appendix}
+\section{Functions of Several Complex Variables}
+This section summarizes the fundamental properties of functions of several complex variables needed later. The results are inspired by \cite[14--30]{grauert:complex_manifolds:2010}.
+
+\begin{definition}
+Let $n \in \mathbb{Z}$, $n \geq 1$, $U \subseteq \mathbb{C}^n$ open and $a \in U$. A mapping $f : U \to \mathbb{C}$ is said to be \bld{complex differentiable at $a$} if there exists $g : U \to \mathbb{C}^n$ such that $g$ is continuous at $a$ and
+\begin{equation}
+f(z) = f(a) + \sum_{\nu = 1}^n(z_\nu - a_\nu)g_\nu(z)
+\end{equation} 
+\noindent holds for all $z \in D$. $f$ is said to be \bld{holomorphic in $D$} if it is complex differentiable at every point $a \in D$. For $m \in \mathbb{Z}$, $m \geq 1$, a mapping $f : U \to \mathbb{C}^m$ is said to be holomorphic in $D$ if each component function $f_\nu$, $\nu = 1,\dots,n$, is holomorphic in $D$.
+\label{def:holomorphic}
+\end{definition}
+
+\begin{proposition}
+Let $n \in \mathbb{Z}$, $n \geq 1$, $D \subseteq \mathbb{C}^n$ open, $a \in U$ and $f : D \to \mathbb{C}$ real differentiable at $a$. Then
+\begin{equation}
+\frac{\partial f}{\partial z_\nu}(a) = \frac{1}{2}\del[3]{\frac{\partial f}{\partial x_\nu}(a) - i \frac{\partial f}{\partial y_\nu}(a)} 
+\end{equation}
+\noindent and
+\begin{equation}
+\frac{\partial f}{\partial \overline{z}_\nu}(a) = \frac{1}{2}\del[3]{\frac{\partial f}{\partial x_\nu}(a) + i \frac{\partial f}{\partial y_\nu}(a)}
+\end{equation}  
+\noindent holds for all $\nu = 1,\dots,n$.
+\label{prop:Wirtinger}
+\end{proposition}
+
+\begin{theorem}[The Cauchy-Riemann Equations]
+Let $n \in \mathbb{Z}$, $n \geq 1$ and $D \subseteq \mathbb{C}^n$ open. A mapping $f: D \to \mathbb{C}$ is holomorphic in $D$ if and only if it is real differentiable at every $a \in D$ and the \bld{Cauchy-Riemann equations}
+\begin{equation}
+\frac{\partial f}{\partial \overline{z}_\nu}(a) = 0 
+\end{equation}
+\noindent holds for all $a \in D$ and $\nu = 1,\dots,n$.
+\label{thm:CR}
+\end{theorem}
+
+\begin{corollary}
+Let $m,n \in \mathbb{Z}$, $m,n \geq 1$, $D \subseteq \mathbb{C}^n$ open and $f: D \to \mathbb{C}^m$ holomorphic in $D$. If $f = g + ih$, $g,h : D \to \mathbb{R}^m$, then 
+\begin{equation}
+\boxed{\frac{\partial g_\mu}{\partial x_\nu}(a) = \frac{\partial h_\mu}{\partial y_\nu}(a) \qquad \text{and} \qquad \frac{\partial h_\mu}{\partial x_\nu}(a) = -\frac{\partial g_\mu}{\partial y_\nu}(a)}
+\end{equation} 
+\noindent holds for any $a \in D$, $\nu = 1,\dots,n$ and $\mu = 1,\dots,m$.
+\label{cor:CRreal}
+\end{corollary}
+
+\begin{proof}
+Fix $\mu = 1,\dots,m$. By definition \ref{def:holomorphic} $f_\mu$ is holomorphic in $D$. Hence $f_\mu$ is real differentiable in $D$ (see \cite[27]{grauert:complex_manifolds:2010}) and theorem \ref{thm:CR} implies
+\begin{equation*}
+\frac{\partial f_\mu}{\partial \overline{z}_\nu}(a) = 0
+\end{equation*}
+\noindent for all $a \in D$ and $\nu = 1,\dots,n$. By proposition \ref{prop:Wirtinger}, this is equivalent to 
+\begin{equation*}
+\frac{\partial f}{\partial x_\nu}(a) + i \frac{\partial f}{\partial y_\nu}(a) = 0.
+\end{equation*}
+Using $f_\mu = g_\mu + i h_\mu$ and the $\mathbb{C}$-linearity of the operators $\frac{\partial}{\partial x_\nu}$ and $\frac{\partial}{\partial y_\nu}$ yields
+\begin{equation*}
+\frac{\partial g_\mu}{\partial x_\nu}(a) - \frac{\partial h_\mu}{\partial y_\nu}(a) + i \del[3]{ \frac{\partial h_\mu}{\partial x_\nu}(a) + \frac{\partial g_\mu}{\partial y_\nu}(a)} = 0.
+\end{equation*}
+\end{proof}
 \section{Tensor Characterization Lemma}
 \begin{definition}
 Let $k,l \in \mathbb{Z}$, $k,l \geq 0$ and $M$ a smooth manifold. Then the \bld{bundle of mixed tensors of type $(k,l)$} is defined by
@@ -396,7 +396,7 @@ A(X_1,\dots,X_k)(p) := A_p(X_1\vert_p,\dots,X_k\vert_p)
 
 \begin{proof}
 We prove (a)$\Leftrightarrow$(b) and (b)$\Rightarrow$(c)$\Rightarrow$(d)$\Rightarrow$(b).\\
-To prove (a)$\Leftrightarrow$(b), let $(U,(x^i))$ be a smooth chart. Proposition \ref{prop:smooth_bundle} together with the proof of the vector bundle chart lemma \cite[253--254]{lee:smooth_manifolds:2013} implies, that the corresponding chart on $T^{(k,l)}TM$ is given by $\del[1]{\pi^{-1}(U),\widetilde{\varphi}}$, where $\widetilde{\varphi}: \pi^{-1}(U) \to \varphi(U) \times \mathbb{R}^{n^{k+l}}$ is defined by
+To prove (a)$\Leftrightarrow$(b), let $(U,(x^i))$ be a smooth chart. Actually, we can prove this for general tensor fields of type $(k,l)$. Proposition \ref{prop:smooth_bundle} together with the proof of the vector bundle chart lemma \cite[253--254]{lee:smooth_manifolds:2013} implies, that the corresponding chart on $T^{(k,l)}TM$ is given by $\del[1]{\pi^{-1}(U),\widetilde{\varphi}}$, where $\widetilde{\varphi}: \pi^{-1}(U) \to \varphi(U) \times \mathbb{R}^{n^{k+l}}$ is defined by
 \begin{equation*}
 \widetilde{\varphi} := (\varphi \times \id_{\mathbb{R}^{n^{k+l}}}) \circ \Phi
 \end{equation*}
