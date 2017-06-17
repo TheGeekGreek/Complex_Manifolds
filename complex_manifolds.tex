@@ -337,7 +337,7 @@ T^{(k,l)}TM := \coprod_{p \in M} T^{(k,l)}(T_pM).
 \end{definition}
 
 \begin{proposition}
-The bundle of mixed tensors of type $(k,l)$ has an unique natural structure as a smooth vector bundle of rank $n^{k + l}$ over $M$.
+The bundle of mixed tensors of type $(k,l)$ has a unique natural structure as a smooth vector bundle of rank $n^{k + l}$ over $M$.
 \label{prop:smooth_bundle}
 \end{proposition}
 
@@ -430,12 +430,12 @@ X^{\mu_1}_1 \cdots X^{\mu_k}_k A^i_{\mu_1 \dots \mu_k}
 \noindent is smooth for $i = 1,\dots,n$. Thus again by the smoothness criterion together with the localness of smoothness \cite[35]{lee:smooth_manifolds:2013} we get that $A(X_1,\dots,X_k) \in \Xfrak(M)$.\\
 To prove (c)$\Rightarrow$(d), we use that smoothness is a local property (see \cite[35]{lee:smooth_manifolds:2013}). Let $p \in U$.  Then by \cite[14]{cattaneo:manifolds:2017} we find a smooth bump function $\psi$ supported in $U$ and identically equal to $1$ on some neighbourhood $V$ of $p$. Set 
 \begin{align*}
-\widetilde{X}_i\vert_p := \begin{cases}
-\psi(p) X_i\vert_p & p \in \supp \psi\\
+\widetilde{X}_\nu\vert_p := \begin{cases}
+\psi(p) X_\nu\vert_p & p \in \supp \psi\\
 0 & p \in M \setminus \supp \psi
 \end{cases}.
 \end{align*}
-Then the gluing lemma for smooth maps \cite[35]{lee:smooth_manifolds:2013} implies $X_1,\dots,X_k \in \Xfrak(M)$. Hence by (c) we get that $A(\widetilde{X}_1,\dots,\widetilde{X}_k) \in \Xfrak(M)$ and so the restriction $A(\widetilde{X}_1,\dots,\widetilde{X}_k)\vert_V$ is smooth. But $A(\widetilde{X}_1,\dots,\widetilde{X}_k)\vert_V = A(X_1,\dots,X_k)$ and so we are done.\\
+Then the gluing lemma for smooth maps \cite[35]{lee:smooth_manifolds:2013} implies $\widetilde{X}_1,\dots,\widetilde{X}_k \in \Xfrak(M)$. Hence by (c) we get that $A(\widetilde{X}_1,\dots,\widetilde{X}_k) \in \Xfrak(M)$ and so the restriction $A(\widetilde{X}_1,\dots,\widetilde{X}_k)\vert_V$ is smooth. But $A(\widetilde{X}_1,\dots,\widetilde{X}_k)\vert_V = A(X_1,\dots,X_k)$ and so we are done.\\
 Lasty to prove (d)$\Rightarrow$(b), each vector field locally defined by 
 \begin{equation*}
 X_{j_\nu} = \delta^{\mu_\nu}_{j_\nu} \frac{\partial}{\partial x^{\mu_\nu}}.
